@@ -1,17 +1,37 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <Curtain
+      direction="right"
+      curtain-class="curtain-test"
+      style="z-index: 10"
+    >
+      <div>
+        <div @click="text">
+          <span>This is a box</span>
+        </div>
+      </div>
+    </Curtain>
+    <div id="test2">
+      <Curtain
+        direction="bottom"
+      ></Curtain>
+    </div>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import Curtain from './components/Curtain'
+// import DragBox from './components/DragBox'
 
 export default {
-  name: 'App',
+  name: "App",
   components: {
-    HelloWorld
+    Curtain
+  },
+  methods: {
+    text() {
+      console.log('111')
+    }
   }
 }
 </script>
@@ -21,8 +41,5 @@ export default {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
 }
 </style>
