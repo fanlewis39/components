@@ -55,16 +55,16 @@ export default {
       wrapperHeight: this.height,
       mouseState: null,
       clientWidth: 0,
-      clientHeight: 0
+      clientHeight: 0,
+      resizeListener: null
     }
   },
   computed: {
     styleObject() {
-      const { direction } = this
       let styleObject = {}
 
       styleObject =
-        (direction === 'left' || direction === 'right')
+        (['left', 'right'].indexOf(this.direction) !== -1)
           ? {
               width: `${this.wrapperWidth}px`,
               height: '100%'
@@ -75,30 +75,25 @@ export default {
             }
 
       return styleObject
-    },
-    maxWrapperWidth() {
-      return this.clientWidth
-    },
-    maxWrapperHeight() {
-      return this.clientHeight
     }
   },
   mounted() {
-    this.setDirectionClass()
+    this.classObject[`vcomp-curtain-handle__${this.direction}`] = true
+
     this.clientWidth = this.$el.parentElement.clientWidth
     this.clientHeight = this.$el.parentElement.clientHeight
 
-    const that = this
-    window.onresize = () => {
-      console.log(that.$el.parentElement)
-      that.clientWidth = that.$el.parentElement.clientWidth
-      that.clientHeight = that.$el.parentElement.clientHeight
+    this.resizeListener = () => {
+      this.clientWidth = this.$el.parentElement.clientWidth
+      this.clientHeight = this.$el.parentElement.clientHeight
     }
+
+    window.addEventListener('resize', this.resizeListener)
+  },
+  beforeDestroy() {
+    window.removeEventListener(this.resizeListener)
   },
   methods: {
-    setDirectionClass() {
-      this.classObject[`vcomp-curtain-handle__${this.direction}`] = true
-    },
     enlargeWrapper(event) {
       const { direction, wrapperWidth, wrapperHeight } = this
 
@@ -114,23 +109,23 @@ export default {
       const { width, height, direction } = this
 
       if (direction === 'left' || direction === 'right') {
-        const { maxWrapperWidth } = this
+        const { clientWidth } = this
         const { baseWidth, clientX } = this.mouseState
 
         this.wrapperWidth = (direction === 'right')
           ? baseWidth + event.clientX - clientX
           : baseWidth + clientX - event.clientX
         this.wrapperWidth = this.wrapperWidth > width ? this.wrapperWidth : width
-        this.wrapperWidth = this.wrapperWidth > maxWrapperWidth - 5 ? maxWrapperWidth - 5 : this.wrapperWidth
+        this.wrapperWidth = this.wrapperWidth > clientWidth - 5 ? clientWidth - 5 : this.wrapperWidth
       } else {
-        const { maxWrapperHeight } = this
+        const { clientHeight } = this
         const { baseHeight, clientY } = this.mouseState
 
         this.wrapperHeight = (direction === 'bottom')
           ? baseHeight + event.clientY - clientY
           : baseHeight + clientY - event.clientY
         this.wrapperHeight = this.wrapperHeight > height ? this.wrapperHeight : height
-        this.wrapperHeight = this.wrapperHeight > this.maxWrapperHeight - 5 ? maxWrapperHeight - 5 : this.wrapperHeight
+        this.wrapperHeight = this.wrapperHeight > this.clientHeight - 5 ? clientHeight - 5 : this.wrapperHeight
       }
     },
     handleMouseUp() {
