@@ -19,7 +19,7 @@ export default {
   props: {
     width: {
       type: Number,
-      default: 280,
+      default: 200,
       validator(value) {
         return value >= 0
       }
@@ -138,22 +138,22 @@ export default {
 
 <style lang="scss">
   .vcomp-curtain {
-    position: relative;
+    position: absolute;
     background-color: white;
-    box-shadow: 0 1px 4px #b9b9b9;
+    box-shadow: 0 1px 4px rgb(185 185 185);
 
     &-handle {
       position: absolute;
-      background-color: #b3aeae;
+      background-color: rgb(179 174 174);
       cursor: pointer;
 
       &:hover {
-        background-color: #848282;
+        background-color: rgb(132 130 130);
       }
     }
 
     &-handle__top {
-      width: 5%;
+      width: 80px;
       height: 5px;
       top: -5px;
       left: 50%;
@@ -163,7 +163,7 @@ export default {
     
     &-handle__right { 
       width: 5px;
-      height: 8%;
+      height: 80px;
       top: 50%;
       right: -5px;
       border-radius: 0 6px 6px 0;
@@ -171,7 +171,7 @@ export default {
     }
 
     &-handle__bottom {
-      width: 5%;
+      width: 80px;
       height: 5px;
       bottom: -5px;
       left: 50%;

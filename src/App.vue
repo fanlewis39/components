@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <Curtain
+    <!-- <Curtain
       direction="right"
       curtain-class="curtain-test"
       style="z-index: 10"
@@ -10,23 +10,25 @@
           <span>This is a box</span>
         </div>
       </div>
-    </Curtain>
+    </Curtain> -->
     <div id="test2">
       <Curtain
         direction="bottom"
       ></Curtain>
     </div>
+    <Dragbox></Dragbox>
   </div>
 </template>
 
 <script>
 import Curtain from './components/Curtain'
-// import DragBox from './components/DragBox'
+import Dragbox from './components/Dragbox'
 
 export default {
   name: "App",
   components: {
-    Curtain
+    Curtain,
+    Dragbox
   },
   methods: {
     text() {
