@@ -1,13 +1,21 @@
 <template>
   <div
-    class="vcomp-dragbox"
+    class="vcomp-drag-box"
+    :class="boxClass"
     :style="{width: `${width}px`, height: `${height}px`}"
+    v-if="isShow"
   >
     <div
-      class="vcomp-dragbox-title"
-      v-if="hasTitle"
+      class="vcomp-drag-box__header"
+      v-if="hasHeader"
     >
-      {{ title }}
+      {{ header }}
+      <div
+        class="vcomp-drag-box-close"
+        @click="closeBox"
+      >
+        x
+      </div>
     </div>
     <slot></slot>
   </div>
@@ -15,7 +23,7 @@
 
 <script>
 export default {
-  name: 'Dragbox',
+  name: 'DragBox',
   props: {
     width: {
       type: Number,
@@ -25,31 +33,63 @@ export default {
       type: Number,
       default: 300
     },
-    title: {
+    header: {
+      type: String,
+      default: ''
+    },
+    boxClass: {
       type: String,
       default: ''
     }
+
   },
   data() {
     return {
-
+      isShow: true
     }
   },
   computed: {
-    hasTitle() {
-      return this.title ? true : false
+    hasHeader() {
+      return this.header ? true : false
     }
   },
-  mounted() {
+  methods: {
+    closeBox() {
+      this.isShow = false
 
+      this.$emit('on-close')
+    }
   }
 }
 </script>
 
 <style lang="scss">
-.vcomp-dragbox {
-  background-color: rgb(243 243 243);
-  box-shadow: 2px 2px 6px #c3c3c3;
+.vcomp-drag-box {
+  position: fixed;
+  left: 0;
+  top: 0;
+  background-color: rgb(253 253 253);
+  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, .1);
   border-radius: 3px;
+
+  &__header {
+    height: 40px;
+    line-height: 40px;
+    padding-left: 20px;
+    border-bottom: 1px solid #ebeef5;
+    box-sizing: border-box;
+
+    .vcomp-drag-box-close {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 40px;
+      height: 40px;
+      line-height: 40px;
+      text-align: center;
+      cursor: pointer;
+      user-select: none;
+    }
+  }
 }
 </style>

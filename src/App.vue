@@ -11,24 +11,28 @@
         </div>
       </div>
     </Curtain> -->
-    <div id="test2">
+    <!-- <div id="test2">
       <Curtain
         direction="bottom"
       ></Curtain>
-    </div>
-    <Dragbox></Dragbox>
+    </div> -->
+    <DragBox
+      box-class="drag-text"
+      header="title"
+      @on-close="text"
+    ></DragBox>
   </div>
 </template>
 
 <script>
-import Curtain from './components/Curtain'
-import Dragbox from './components/Dragbox'
+// import Curtain from './components/Curtain'
+import DragBox from './components/DragBox'
 
 export default {
   name: "App",
   components: {
-    Curtain,
-    Dragbox
+    // Curtain,
+    DragBox
   },
   methods: {
     text() {
