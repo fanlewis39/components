@@ -8,8 +8,9 @@
     <div
       class="vcomp-drag-box__header"
       v-if="hasHeader"
+      @mousedown="handleHeaderMove"
     >
-      {{ header }}
+      <span>{{ header }}</span>
       <div
         class="vcomp-drag-box-close"
         @click="closeBox"
@@ -45,7 +46,10 @@ export default {
   },
   data() {
     return {
-      isShow: true
+      isShow: true,
+      clientX: 0,
+      clientY: 0,
+      moveListener: null
     }
   },
   computed: {
@@ -53,11 +57,25 @@ export default {
       return this.header ? true : false
     }
   },
+  mounted() {
+    this.moveListener = (e) => {
+        console.log(e.clientX - this.clientX)
+        console.log(e.clientY - this.clientY)
+    }
+
+    window.addEventListener('mouseup', this.handleMouseUp)
+  },
   methods: {
     closeBox() {
       this.isShow = false
 
       this.$emit('on-close')
+    },
+    handleHeaderMove() {
+      document.addEventListener('mousemove', this.moveListener)
+    },
+    handleMouseUp() {
+      document.removeEventListener('mousemove', this.moveListener)
     }
   }
 }
@@ -71,6 +89,7 @@ export default {
   background-color: rgb(253 253 253);
   box-shadow: 0 2px 12px 0 rgba(0, 0, 0, .1);
   border-radius: 3px;
+  user-select: none;
 
   &__header {
     height: 40px;
@@ -78,6 +97,7 @@ export default {
     padding-left: 20px;
     border-bottom: 1px solid #ebeef5;
     box-sizing: border-box;
+    font-size: 20px;
 
     .vcomp-drag-box-close {
       position: absolute;
@@ -88,7 +108,6 @@ export default {
       line-height: 40px;
       text-align: center;
       cursor: pointer;
-      user-select: none;
     }
   }
 }
