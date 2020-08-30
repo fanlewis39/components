@@ -1,7 +1,7 @@
 <template>
   <div
     class="vcomp-curtain"
-    :class="curtainClass"
+    :class="[{ 'vcomp-curtain--inner': inner }, curtainClass]"
     :style="styleObject"
   >
     <div
@@ -37,6 +37,10 @@ export default {
       validator(value) {
         return ['top', 'right', 'bottom', 'left'].indexOf(value) !== -1
       }
+    },
+    inner: {
+      type: Boolean,
+      default: false
     },
     curtainClass: {
       type: String,
@@ -82,10 +86,14 @@ export default {
 
     this.clientWidth = this.$el.parentElement.clientWidth
     this.clientHeight = this.$el.parentElement.clientHeight
+      ? this.$el.parentElement.clientHeight
+      : window.screen.availHeight - 70
 
     this.resizeListener = () => {
       this.clientWidth = this.$el.parentElement.clientWidth
       this.clientHeight = this.$el.parentElement.clientHeight
+      ? this.$el.parentElement.clientHeight
+      : window.screen.availHeight - 70
     }
 
     window.addEventListener('resize', this.resizeListener)
@@ -112,7 +120,7 @@ export default {
         const { clientWidth } = this
         const { baseWidth, clientX } = this.mouseState
 
-        this.wrapperWidth = (direction === 'right')
+        this.wrapperWidth = direction === 'right'
           ? baseWidth + event.clientX - clientX
           : baseWidth + clientX - event.clientX
         this.wrapperWidth = this.wrapperWidth > width ? this.wrapperWidth : width
@@ -121,7 +129,7 @@ export default {
         const { clientHeight } = this
         const { baseHeight, clientY } = this.mouseState
 
-        this.wrapperHeight = (direction === 'bottom')
+        this.wrapperHeight = direction === 'bottom'
           ? baseHeight + event.clientY - clientY
           : baseHeight + clientY - event.clientY
         this.wrapperHeight = this.wrapperHeight > height ? this.wrapperHeight : height
@@ -135,57 +143,3 @@ export default {
   }
 }
 </script>
-
-<style lang="scss">
-  .vcomp-curtain {
-    position: absolute;
-    background-color: white;
-    box-shadow: 0 1px 4px rgb(185 185 185);
-
-    &-handle {
-      position: absolute;
-      background-color: rgb(179 174 174);
-      cursor: pointer;
-
-      &:hover {
-        background-color: rgb(132 130 130);
-      }
-    }
-
-    &-handle__top {
-      width: 80px;
-      height: 5px;
-      top: -5px;
-      left: 50%;
-      border-radius: 6px 6px 0 0;
-      transform: translateX(-50%);
-    }
-    
-    &-handle__right { 
-      width: 5px;
-      height: 80px;
-      top: 50%;
-      right: -5px;
-      border-radius: 0 6px 6px 0;
-      transform: translateY(-50%);
-    }
-
-    &-handle__bottom {
-      width: 80px;
-      height: 5px;
-      bottom: -5px;
-      left: 50%;
-      border-radius: 0 0 6px 6px;
-      transform: translateX(-50%);
-    }
-
-    &-handle__left {
-      width: 5px;
-      height: 80px;
-      top: 50%;
-      left: -5px;
-      border-radius: 6px 0 0 6px;
-      transform: translateY(-50%);
-    }
-  }
-</style>

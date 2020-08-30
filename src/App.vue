@@ -11,28 +11,26 @@
         </div>
       </div>
     </Curtain> -->
-    <!-- <div id="test2">
-      <Curtain
-        direction="bottom"
-      ></Curtain>
-    </div> -->
-    <DragBox
+    <Curtain
+      direction="bottom"
+    ></Curtain>
+    <!-- <DragBox
       box-class="drag-text"
       header="title"
       @on-close="text"
-    ></DragBox>
+    ></DragBox> -->
   </div>
 </template>
 
 <script>
-// import Curtain from './components/Curtain'
-import DragBox from './components/DragBox'
+import Curtain from './components/Curtain'
+// import DragBox from './components/DragBox'
 
 export default {
   name: "App",
   components: {
-    // Curtain,
-    DragBox
+    Curtain,
+    // DragBox
   },
   methods: {
     text() {
@@ -43,6 +41,11 @@ export default {
 </script>
 
 <style>
+
+html, body {
+  margin: 0;
+}
+
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;

@@ -80,35 +80,3 @@ export default {
   }
 }
 </script>
-
-<style lang="scss">
-.vcomp-drag-box {
-  position: fixed;
-  left: 0;
-  top: 0;
-  background-color: rgb(253 253 253);
-  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, .1);
-  border-radius: 3px;
-  user-select: none;
-
-  &__header {
-    height: 40px;
-    line-height: 40px;
-    padding-left: 20px;
-    border-bottom: 1px solid #ebeef5;
-    box-sizing: border-box;
-    font-size: 20px;
-
-    .vcomp-drag-box-close {
-      position: absolute;
-      top: 0;
-      right: 0;
-      width: 40px;
-      height: 40px;
-      line-height: 40px;
-      text-align: center;
-      cursor: pointer;
-    }
-  }
-}
-</style>

@@ -20,7 +20,6 @@ module.exports = {
       }
     ],
     'vue/eqeqeq': 'error',
-    'vue/object-curly-spacing': 'error',
     'vue/require-direct-export': 'error',
     'vue/no-parsing-error': [
       'error',
