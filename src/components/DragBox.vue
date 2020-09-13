@@ -2,30 +2,43 @@
   <div
     class="vcomp-drag-box"
     :class="boxClass"
-    :style="{width: `${width}px`, height: `${height}px`}"
-    v-if="isShow"
   >
-    <div
-      class="vcomp-drag-box__header"
-      v-if="hasHeader"
-      @mousedown="handleHeaderMove"
-    >
-      <span>{{ header }}</span>
+    <transition name="fade">
       <div
-        class="vcomp-drag-box-close"
-        @click="closeBox"
+        class="vcomp-drag-box-wrapper"
+        v-show="currentActive"
+        :style="{width: `${width}px`, height: `${height}px`}"
       >
-        x
+        <div
+          class="vcomp-drag-box__header"
+          v-if="hasHeader"
+          @mousedown="handleHeaderMove"
+        >
+          <span>{{ header }}</span>
+          <div
+            class="vcomp-drag-box-close"
+            @click="closeBox"
+          >
+            x
+          </div>
+        </div>
       </div>
-    </div>
-    <slot></slot>
+      <slot></slot>
+    </transition>
   </div>
 </template>
 
 <script>
 export default {
   name: 'DragBox',
+  model: {
+    prop: 'active'
+  },
   props: {
+    active: {
+      type: Boolean,
+      default: false
+    },
     width: {
       type: Number,
       default: 500
@@ -49,13 +62,19 @@ export default {
       isShow: true,
       clientX: 0,
       clientY: 0,
-      moveListener: null
+      moveListener: null,
+      currentActive: this.active
     }
   },
   computed: {
     hasHeader() {
       return this.header ? true : false
     }
+  },
+  watch: {
+    active(value) {
+      this.currentActive = value
+    },
   },
   mounted() {
     this.moveListener = (e) => {
@@ -67,9 +86,9 @@ export default {
   },
   methods: {
     closeBox() {
-      this.isShow = false
+      this.currentActive = false
 
-      this.$emit('on-close')
+      // this.$emit('on-close')
     },
     handleHeaderMove() {
       document.addEventListener('mousemove', this.moveListener)

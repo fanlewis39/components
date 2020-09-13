@@ -1,0 +1,90 @@
+.vcomp-curtain {
+  position: fixed;
+
+  &--inner {
+    position: absolute;
+  }
+
+  &-wrapper {
+    box-shadow: 0 1px 4px rgb(185 185 185);
+  }
+
+  &-handle {
+    position: absolute;
+    background-color: rgb(179 174 174);
+    cursor: pointer;
+
+    &:hover {
+      background-color: rgb(132 130 130);
+    }
+  }
+
+  &-handle__top {
+    width: 80px;
+    height: 5px;
+    top: -5px;
+    left: 50%;
+    border-radius: 6px 6px 0 0;
+    transform: translateX(-50%);
+  }
+  
+  &-handle__right { 
+    width: 5px;
+    height: 80px;
+    top: 50%;
+    right: -5px;
+    border-radius: 0 6px 6px 0;
+    transform: translateY(-50%);
+  }
+
+  &-handle__bottom {
+    width: 80px;
+    height: 5px;
+    bottom: -5px;
+    left: 50%;
+    border-radius: 0 0 6px 6px;
+    transform: translateX(-50%);
+  }
+
+  &-handle__left {
+    width: 5px;
+    height: 80px;
+    top: 50%;
+    left: -5px;
+    border-radius: 6px 0 0 6px;
+    transform: translateY(-50%);
+  }
+}
+
+.vcomp-drag-box {
+  position: fixed;
+
+  &-wrapper {
+    left: 0;
+    top: 0;
+    background-color: rgb(253 253 253);
+    box-shadow: 0 2px 12px 0 rgba(0, 0, 0, .1);
+    border-radius: 3px;
+    user-select: none;
+  }
+
+  &__header {
+    height: 40px;
+    line-height: 40px;
+    padding-left: 20px;
+    border-bottom: 1px solid #ebeef5;
+    box-sizing: border-box;
+    font-size: 20px;
+
+    .vcomp-drag-box-close {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 40px;
+      height: 40px;
+      line-height: 40px;
+      text-align: center;
+      cursor: pointer;
+    }
+  }
+}

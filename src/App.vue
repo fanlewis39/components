@@ -11,30 +11,40 @@
         </div>
       </div>
     </Curtain> -->
-    <Curtain
-      direction="bottom"
-    ></Curtain>
-    <!-- <DragBox
+    <!-- <Curtain v-model="curtainActive"></Curtain> -->
+    <button @click="handleClick">
+      test
+    </button>
+    <DragBox
+      v-model="curtainActive"
       box-class="drag-text"
       header="title"
-      @on-close="text"
-    ></DragBox> -->
+    ></DragBox>
   </div>
 </template>
 
 <script>
+/* eslint-disable */
 import Curtain from './components/Curtain'
-// import DragBox from './components/DragBox'
+import DragBox from './components/DragBox'
 
 export default {
   name: "App",
   components: {
     Curtain,
-    // DragBox
+    DragBox
+  },
+  data() {
+    return {
+      curtainActive: false
+    }
   },
   methods: {
     text() {
       console.log('111')
+    },
+    handleClick() {
+      this.curtainActive = !this.curtainActive
     }
   }
 }
@@ -50,5 +60,11 @@ html, body {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
 }
 </style>

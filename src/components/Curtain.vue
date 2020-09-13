@@ -2,21 +2,41 @@
   <div
     class="vcomp-curtain"
     :class="[{ 'vcomp-curtain--inner': inner }, curtainClass]"
-    :style="styleObject"
   >
-    <div
-      class="vcomp-curtain-handle"
-      :class="classObject"
-      @mousedown.prevent="enlargeWrapper"
-    ></div>
-    <slot></slot>
+    <transition :name="transitionName">
+      <div
+        v-show="currentActive"
+        class="vcomp-curtain-wrapper"
+        :style="wrapperStyle"
+      >
+        <div
+          class="vcomp-curtain-handle"
+          :class="classObject"
+          @mousedown.left.prevent="enlargeWrapper"
+        ></div>
+        <div
+          style="width: 100%; height: 100%;"
+          :style="{ pointerEvents: isMoving ? 'none' : '' }"
+        >
+          <slot></slot>
+        </div>
+      </div>
+    </transition>
   </div>
 </template>
 
 <script>
 export default {
   name: 'Curtain',
+  model: {
+    prop: 'active',
+    event: 'on-toggle'
+  },
   props: {
+    active: {
+      type: Boolean,
+      default: true
+    },
     width: {
       type: Number,
       default: 200,
@@ -60,40 +80,59 @@ export default {
       mouseState: null,
       clientWidth: 0,
       clientHeight: 0,
-      resizeListener: null
+      resizeListener: null,
+      currentActive: this.active,
+      isMoving: false
     }
   },
   computed: {
-    styleObject() {
-      let styleObject = {}
+    wrapperStyle() {
+      let wrapperStyle = {}
 
-      styleObject =
+      wrapperStyle =
         (['left', 'right'].indexOf(this.direction) !== -1)
           ? {
-              width: `${this.wrapperWidth}px`,
-              height: '100%'
-            }
+            width: `${this.wrapperWidth}px`,
+            height: `${this.clientHeight}px`
+          }
           : {
-              width: '100%',
-              height: `${this.wrapperHeight}px`
-            }
+            width: `${this.clientWidth}px`,
+            height: `${this.wrapperHeight}px`
+          }
 
-      return styleObject
+      return wrapperStyle
+    },
+    transitionName() {
+      return `vcomp-show-${this.direction}`
+    }
+  },
+  watch: {
+    active(value) {
+      this.currentActive = value
+    },
+    currentActive(value) {
+      if (value) {
+        this.wrapperWidth = this.width
+      }
     }
   },
   mounted() {
     this.classObject[`vcomp-curtain-handle__${this.direction}`] = true
 
-    this.clientWidth = this.$el.parentElement.clientWidth
-    this.clientHeight = this.$el.parentElement.clientHeight
-      ? this.$el.parentElement.clientHeight
-      : window.screen.availHeight - 70
+    const element = this.$el.parentElement.parentElement.parentElement
+
+    this.clientWidth = element.clientWidth
+    this.clientHeight = element.clientHeight
+      ? element.clientHeight
+      : window.innerHeight
 
     this.resizeListener = () => {
-      this.clientWidth = this.$el.parentElement.clientWidth
-      this.clientHeight = this.$el.parentElement.clientHeight
-      ? this.$el.parentElement.clientHeight
-      : window.screen.availHeight - 70
+      const element = this.$el.parentElement.parentElement.parentElement
+
+      this.clientWidth = element.clientWidth
+      this.clientHeight = element.clientHeight
+        ? element.clientHeight
+        : window.innerHeight
     }
 
     window.addEventListener('resize', this.resizeListener)
@@ -102,6 +141,10 @@ export default {
     window.removeEventListener(this.resizeListener)
   },
   methods: {
+    handleToggle() {
+      this.currentActive = !this.currentActive
+      this.$emit('on-toggle', this.currentActive)
+    },
     enlargeWrapper(event) {
       const { direction, wrapperWidth, wrapperHeight } = this
 
@@ -114,6 +157,10 @@ export default {
       document.addEventListener('mouseup', this.handleMouseUp)
     },
     handleMouseMove(event) {
+      event.preventDefault()
+
+      this.isMoving = true
+
       const { width, height, direction } = this
 
       if (direction === 'left' || direction === 'right') {
@@ -139,6 +186,8 @@ export default {
     handleMouseUp() {
       document.removeEventListener('mousemove', this.handleMouseMove)
       document.removeEventListener('mouseup', this.handleMouseUp)
+
+      this.isMoving = false
     }
   }
 }
