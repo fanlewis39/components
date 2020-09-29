@@ -1,0 +1,51 @@
+.vcomp-carousel {
+  &__arrow {
+    border: none;
+    outline: none;
+    padding: 0;
+    margin: 0;
+    height: 36px;
+    width: 36px;
+    cursor: pointer;
+    transition: .3s;
+    border-radius: 50%;
+    background-color: rgba(31,45,61,.11);
+    color: #fff;
+    position: absolute;
+    top: 50%;
+    z-index: 10;
+    transform: translate(0, -50%);
+    text-align: center;
+    font-size: 12px;
+
+    &:hover {
+      background-color: rgba(31,45,61,.23);
+    }
+
+    &--left {
+      left: 15px;
+    }
+
+    &--right {
+      right: 15px;
+    }
+  }
+
+  &__list {
+    position: relative;
+    overflow: hidden;
+    display: flex;
+  }
+
+  &__track,
+  &__track--sub {
+    left: 0;
+    top: 0;
+    display: flex;
+    z-index: 1;
+  }
+
+  &__track--sub {
+    position: absolute;
+  }
+}

@@ -6,12 +6,12 @@
     <transition :name="transitionName">
       <div
         v-show="currentActive"
-        class="vcomp-curtain-wrapper"
+        class="vcomp-curtain__wrapper"
         :style="wrapperStyle"
       >
         <div
-          class="vcomp-curtain-handle"
-          :class="classObject"
+          class="vcomp-curtain__handle"
+          :class="[ 'vcomp-curtain__handle--' + direction ]"
           @mousedown.left.prevent="enlargeWrapper"
         ></div>
         <div
@@ -63,18 +63,12 @@ export default {
       default: false
     },
     curtainClass: {
-      type: String,
-      default: ''
+      type: [String, Array],
+      default: null
     }
   },
   data() {
     return {
-      classObject: {
-        'vcomp-curtain-handle__top': false,
-        'vcomp-curtain-handle__right': false,
-        'vcomp-curtain-handle__bottom': false,
-        'vcomp-curtain-handle__left': false
-      },
       wrapperWidth: this.width,
       wrapperHeight: this.height,
       mouseState: null,
@@ -117,8 +111,6 @@ export default {
     }
   },
   mounted() {
-    this.classObject[`vcomp-curtain-handle__${this.direction}`] = true
-
     const element = this.$el.parentElement.parentElement.parentElement
 
     this.clientWidth = element.clientWidth
@@ -138,7 +130,7 @@ export default {
     window.addEventListener('resize', this.resizeListener)
   },
   beforeDestroy() {
-    window.removeEventListener(this.resizeListener)
+    window.removeEventListener('resize', this.resizeListener)
   },
   methods: {
     handleToggle() {

@@ -5,11 +5,11 @@
     position: absolute;
   }
 
-  &-wrapper {
+  &__wrapper {
     box-shadow: 0 1px 4px rgb(185 185 185);
   }
 
-  &-handle {
+  &__handle {
     position: absolute;
     background-color: rgb(179 174 174);
     cursor: pointer;
@@ -19,7 +19,7 @@
     }
   }
 
-  &-handle__top {
+  &__handle--top {
     width: 80px;
     height: 5px;
     top: -5px;
@@ -27,8 +27,8 @@
     border-radius: 6px 6px 0 0;
     transform: translateX(-50%);
   }
-  
-  &-handle__right { 
+
+  &__handle--right {
     width: 5px;
     height: 80px;
     top: 50%;
@@ -37,7 +37,7 @@
     transform: translateY(-50%);
   }
 
-  &-handle__bottom {
+  &__handle--bottom {
     width: 80px;
     height: 5px;
     bottom: -5px;
@@ -46,45 +46,12 @@
     transform: translateX(-50%);
   }
 
-  &-handle__left {
+  &__handle--left {
     width: 5px;
     height: 80px;
     top: 50%;
     left: -5px;
     border-radius: 6px 0 0 6px;
     transform: translateY(-50%);
-  }
-}
-
-.vcomp-drag-box {
-  position: fixed;
-
-  &-wrapper {
-    left: 0;
-    top: 0;
-    background-color: rgb(253 253 253);
-    box-shadow: 0 2px 12px 0 rgba(0, 0, 0, .1);
-    border-radius: 3px;
-    user-select: none;
-  }
-
-  &__header {
-    height: 40px;
-    line-height: 40px;
-    padding-left: 20px;
-    border-bottom: 1px solid #ebeef5;
-    box-sizing: border-box;
-    font-size: 20px;
-
-    .vcomp-drag-box-close {
-      position: absolute;
-      top: 0;
-      right: 0;
-      width: 40px;
-      height: 40px;
-      line-height: 40px;
-      text-align: center;
-      cursor: pointer;
-    }
   }
 }

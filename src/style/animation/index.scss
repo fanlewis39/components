@@ -1,0 +1,80 @@
+// vcomp-fade
+.vcomp-fade-enter-active, .vcomp-fade-leave-active {
+  transition: opacity .5s;
+}
+
+.vcomp-fade-enter, .vcomp-fade-leave-to  {
+  opacity: 0;
+}
+
+// vcomp-show-left
+.vcomp-show-left-enter,
+.vcomp-show-left-leave-to {
+  opacity: 0;
+  transform: translateX(-100%);
+}
+
+.vcomp-show-left-enter-to,
+.vcomp-show-left-leave {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.vcomp-show-left-enter-active,
+.vcomp-show-left-leave-active {
+  transition: all .5s;
+}
+
+// vcomp-show-right
+.vcomp-show-right-enter,
+.vcomp-show-right-leave-to {
+  opacity: 0;
+  transform: translateX(-100%);
+}
+
+.vcomp-show-right-enter-to,
+.vcomp-show-right-leave {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.vcomp-show-right-enter-active,
+.vcomp-show-right-leave-active {
+  transition: all .5s;
+}
+
+// vcomp-show-top
+.vcomp-show-top-enter,
+.vcomp-show-top-leave-to {
+  opacity: 0;
+  transform: translateY(-100%);
+}
+
+.vcomp-show-top-enter-to,
+.vcomp-show-top-leave {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.vcomp-show-top-enter-active,
+.vcomp-show-top-leave-active {
+  transition: all .5s;
+}
+
+// vcomp-show-bottom
+.vcomp-show-bottom-enter,
+.vcomp-show-bottom-leave-to {
+  opacity: 0;
+  transform: translateY(-100%);
+}
+
+.vcomp-show-bottom-enter-to,
+.vcomp-show-bottom-leave {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.vcomp-show-bottom-enter-active,
+.vcomp-show-bottom-leave-active {
+  transition: all .5s;
+}
