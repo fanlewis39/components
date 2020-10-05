@@ -120,7 +120,7 @@ export default {
   methods: {
     close() {
       this.currentActive = false
-      this.$emit('on-close', this.currentActive)
+      this.$emit('close', this.currentActive)
     },
     handleMouseDown() {
       this.clientX = event.clientX

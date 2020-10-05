@@ -135,7 +135,7 @@ export default {
   methods: {
     handleToggle() {
       this.currentActive = !this.currentActive
-      this.$emit('on-toggle', this.currentActive)
+      this.$emit('toggle', this.currentActive)
     },
     enlargeWrapper(event) {
       const { direction, wrapperWidth, wrapperHeight } = this

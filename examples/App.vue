@@ -22,7 +22,7 @@
     >
       aaa
     </DragBox> -->
-    <Carousel>
+    <Carousel :auto-play="false" direction="vertical">
       <CarouselItem>
         <div class="carousel-demo">
           1
@@ -99,6 +99,10 @@ button {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+}
+
+.vcomp-carousel-item {
+  height: 200px;
 }
 
 .carousel-demo {
