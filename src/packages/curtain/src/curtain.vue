@@ -30,7 +30,7 @@ export default {
   name: 'Curtain',
   model: {
     prop: 'active',
-    event: 'on-toggle'
+    event: 'toggle'
   },
   props: {
     active: {

@@ -22,23 +22,51 @@
     >
       aaa
     </DragBox> -->
-    <Carousel :auto-play="false" direction="vertical">
-      <CarouselItem>
+    <Carousel
+      :auto-play="false"
+      :loop="true"
+      height="200"
+      v-model="index"
+      @change="handleChange"
+      @select="handleSelect"
+    >
+      <CarouselItem item-class="aa">
         <div class="carousel-demo">
           1
         </div>
       </CarouselItem>
-      <CarouselItem>
+      <CarouselItem item-class="aa">
         <div class="carousel-demo">
           2
         </div>
       </CarouselItem>
-      <CarouselItem>
+      <CarouselItem item-class="aa">
         <div class="carousel-demo">
           3
         </div>
       </CarouselItem>
     </Carousel>
+    <!-- <Carousel
+      :auto-play="false"
+      :loop="true"
+      direction="vertical"
+    >
+      <CarouselItem>
+        <div class="carousel-image-demo">
+          <img src="./image/1.jpg" />
+        </div>
+      </CarouselItem>
+      <CarouselItem>
+        <div class="carousel-image-demo">
+          <img src="./image/2.jpg" />
+        </div>
+      </CarouselItem>
+      <CarouselItem>
+        <div class="carousel-image-demo">
+          <img src="./image/3.jpg" />
+        </div>
+      </CarouselItem>
+    </Carousel> -->
   </div>
 </template>
 
@@ -54,7 +82,8 @@ export default {
   },
   data() {
     return {
-      active: true
+      active: false,
+      index: 0
     }
   },
   methods: {
@@ -63,6 +92,12 @@ export default {
     },
     handleClick() {
       this.active = !this.active
+    },
+    handleChange(val) {
+      console.log(val)
+    },
+    handleSelect(val) {
+      console.log(val)
     }
   }
 }
@@ -101,10 +136,6 @@ button {
   transform: translate(-50%, -50%);
 }
 
-.vcomp-carousel-item {
-  height: 200px;
-}
-
 .carousel-demo {
   width: 800px;
   height: 200px;
@@ -114,5 +145,18 @@ button {
   align-items: center;
   font-size: 18px;
   color: white;
+}
+
+.carousel-image-demo {
+  width: 800px;
+  height: 500px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.carousel-image-demo > img {
+  width: 100%;
+  height: 100%;
 }
 </style>

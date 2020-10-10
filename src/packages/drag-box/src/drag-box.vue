@@ -42,7 +42,7 @@ export default {
   },
   model: {
     prop: 'active',
-    event: 'on-close'
+    event: 'close'
   },
   props: {
     active: {

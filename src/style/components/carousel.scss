@@ -1,33 +1,47 @@
 .vcomp-carousel {
+  user-select: none;
+
   &__arrow {
     border: none;
     outline: none;
     padding: 0;
     margin: 0;
-    height: 36px;
-    width: 36px;
+    height: 35px;
+    width: 35px;
     cursor: pointer;
     transition: .3s;
     border-radius: 50%;
     background-color: rgba(31,45,61,.11);
     color: #fff;
     position: absolute;
-    top: 50%;
     z-index: 10;
-    transform: translate(0, -50%);
-    text-align: center;
-    font-size: 12px;
 
     &:hover {
       background-color: rgba(31,45,61,.23);
     }
 
     &--left {
+      top: 50%;
       left: 15px;
+      transform: translate(0, -50%);
     }
 
     &--right {
+      top: 50%;
       right: 15px;
+      transform: translate(0, -50%);
+    }
+
+    &--up {
+      top: 15px;
+      left: 50%;
+      transform: translate(-50%, 0);
+    }
+
+    &--down {
+      top: calc(100% - 50px);
+      left: 50%;
+      transform: translate(-50%, 0);
     }
   }
 

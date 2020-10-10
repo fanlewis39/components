@@ -2,6 +2,7 @@
   <div :class="['vcomp-carousel', `vcomp-carousel--${direction}`]">
     <div
       class="vcomp-carousel__wrapper"
+      :style="{ height: height + 'px' }"
       @mouseenter.stop="handleMouseEnter"
       @mouseleave.stop="handleMouseLeave"
     >
@@ -12,10 +13,10 @@
         <button 
           type="button"
           v-show="arrow === 'always' || hover"
-          class="vcomp-carousel__arrow vcomp-carousel__arrow--left"
+          :class="['vcomp-carousel__arrow', `vcomp-carousel__arrow--${arrowList[0]}`]"
           @click="handlePrevClick"
         >
-          <Icon name="angle-left"></Icon>
+          <Icon :name="`angle-${arrowList[0]}`"></Icon>
         </button>
       </transition>
       <transition
@@ -25,10 +26,10 @@
         <button 
           type="button"
           v-show="arrow === 'always' || hover"
-          class="vcomp-carousel__arrow vcomp-carousel__arrow--right"
+          :class="['vcomp-carousel__arrow', `vcomp-carousel__arrow--${arrowList[1]}`]"
           @click="handleNextClick"
         >
-          <Icon name="angle-right"></Icon>
+          <Icon :name="`angle-${arrowList[1]}`"></Icon>
         </button>
       </transition>
       <div
@@ -58,13 +59,24 @@
 import CarouselItem from './carousel-item'
 import Icon from '../../icon'
 
-/* eslint-disable */
 export default {
   name: 'Carousel',
   components: {
     Icon
   },
+  model: {
+    prop: 'initialIndex',
+    event: 'change'
+  },
   props: {
+    initialIndex: {
+      type: Number,
+      default: 0
+    },
+    height: {
+      type: String,
+      default: ''
+    },
     arrow: {
       type: String,
       default: 'hover',
@@ -72,9 +84,12 @@ export default {
         return ['hover', 'always', 'never'].indexOf(value) !== -1
       }
     },
-    activeIndex: {
-      type: Number,
-      default: 0
+    dots: {
+      type: String,
+      default: 'inside',
+      validator(value) {
+        return ['inside', 'never'].indexOf(value) !== -1
+      }
     },
     direction: {
       type: String,
@@ -91,7 +106,7 @@ export default {
       type: Boolean,
       default: true
     },
-    speed: {
+    interval: {
       type: Number,
       default: 3000
     }
@@ -99,19 +114,24 @@ export default {
   data() {
     return {
       items: [],
-      activeItem: 0,
+      activeItem: this.initialIndex,
       hover: false,
       itemWidth: 0,
       itemHeight: 0,
       listWidth: 0,
       listHeight: 0,
       transition: true,
-      timer: null
+      timer: null,
+      isAnimating: false,
+      timeout: null
     }
   },
   computed: {
     arrowDisplay() {
       return this.arrow !== 'never'
+    },
+    arrowList() {
+      return this.direction === 'horizontal' ? ['left', 'right'] : ['up', 'down']
     },
     counts() {
       return this.loop ? this.items.length / 2 : this.items.length
@@ -130,42 +150,39 @@ export default {
         height: this.direction === 'horizontal' ? 'auto' : `${itemHeight}px`
       }
     },
-    trackStyle() {
+    trackStyleBase() {
       const {
-        itemWidth,
-        itemHeight,
+        direction,
         counts,
-        translateDirection,
-        activeItem,
-        translateProp,
         transition
       } = this
 
       return {
-        width: this.direction === 'horizontal' ? `${itemWidth * counts}px` : 'auto',
-        height: this.direction === 'horizontal' ? 'auto' : `${itemHeight * counts}px`,
-        transform: `${translateDirection}(${-activeItem * this[`item${translateProp}`]}px)`,
+        width: direction === 'horizontal' ? `${this.itemWidth * counts}px` : 'auto',
+        height: direction === 'horizontal' ? 'auto' : `${this.itemHeight * counts}px`,
         transition: transition ? `transform 300ms` : 'none',
-        display: this.direction === 'horizontal'? 'flex' : 'block'
+        display: direction === 'horizontal'? 'flex' : 'block'
+      }
+    },
+    trackStyle() {
+      return {
+        ...this.trackStyleBase,
+        ...{
+          transform: `${this.translateDirection}(${
+            -this.activeItem * this[`item${this.translateProp}`]
+          }px)`
+        }
       }
     },
     subTrackStyle() {
-      const {
-        itemWidth,
-        itemHeight,
-        counts,
-        translateDirection,
-        activeItem,
-        translateProp,
-        transition
-      } = this
-
       return {
-        width: this.direction === 'horizontal' ? `${itemWidth * counts}px` : 'auto',
-        height: this.direction === 'horizontal' ? 'auto' : `${itemHeight * counts}px`,
-        transform: `${translateDirection}(${-activeItem * this[`item${translateProp}`] + this[`item${translateProp}`] * counts}px)`,
-        transition: transition ? `transform 300ms` : 'none',
-        display: this.direction === 'horizontal'? 'flex' : 'block'
+        ...this.trackStyleBase,
+        ...{
+          transform: `${this.translateDirection}(${
+            -this.activeItem * this[`item${this.translateProp}`] +
+            this[`item${this.translateProp}`] * this.counts
+          }px)`,
+        }
       }
     }
   },
@@ -178,7 +195,12 @@ export default {
       value ? this.startTimer() : this.parseTimer()
     },
     activeItem(value) {
+      if (value === this.counts) return
+
       this.$emit('change', value)
+    },
+    initialIndex(value) {
+      this.activeItem = value
     }
   },
   mounted() {
@@ -186,8 +208,11 @@ export default {
 
     this.$nextTick(() => {
       this.refresh()
-      this.startTimer()
+      this.startTimer() 
     })
+  },
+  beforeDestroy() {
+    clearTimeout(this.timeout)
   },
   methods: {
     handleMouseEnter() {
@@ -199,11 +224,15 @@ export default {
       this.startTimer()
     },
     handlePrevClick() {
-      if (this.activeItem === 0) {
-        this.activeItem = this.counts
-        this.transition = false
+      if (this.isAnimating) return
 
-        setTimeout(() => {
+      if (this.activeItem === 0) {
+        if (this.loop) {
+          this.activeItem = this.counts
+          this.transition = false
+        }
+
+        this.timeout = setTimeout(() => {
           this.moveActiveItem(-1)
         }, 20)
       } else {
@@ -211,6 +240,8 @@ export default {
       }
     },
     handleNextClick() {
+      if ((this.activeItem === this.counts - 1 && !this.loop) || this.isAnimating) return
+
       this.moveActiveItem(1)
     },
     moveActiveItem(value) {
@@ -221,20 +252,26 @@ export default {
         }
         case 1: {
           this.activeItem++
+          break
         }
       }
 
       this.transition = true
+      this.isAnimating = true
     },
     afterTransition() {
       if (this.activeItem === this.counts) {
         this.transition = false
         this.activeItem = 0
       }
+
+      this.isAnimating = false
     },
     startTimer() {
-      if (this.autoPlay && !this.timer && this.speed >= 3000) {
-        this.timer = setInterval(this.playSlides, this.speed)
+      this.interval = this.interval < 3000 ? 3000 : this.interval
+
+      if (this.autoPlay && !this.timer) {
+        this.timer = setInterval(this.playSlides, this.interval)
       }
     },
     parseTimer() {
@@ -244,12 +281,21 @@ export default {
       }
     },
     playSlides() {
-      if (this.activeItem === this.counts) {
-        this.transition = false
-        this.activeItem = 0
+      if (this.loop) {
+        if (this.activeItem === this.counts) {
+          this.activeItem = 0
+          this.transition = false
+        } else {
+          this.activeItem++
+          this.transition = true
+        }
       } else {
-        this.activeItem++
-        this.transition = true
+        if (this.activeItem < this.counts - 1) {
+          this.activeItem++
+          this.transition = true
+        } else {
+          this.parseTimer()
+        }
       }
     },
     updateItems() {
