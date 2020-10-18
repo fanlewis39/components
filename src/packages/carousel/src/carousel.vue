@@ -33,25 +33,41 @@
         </button>
       </transition>
       <div
-        :style="listStyle"
         class="vcomp-carousel__list"
+        :style="listStyle"
       >
         <div
-          :style="trackStyle"
           class="vcomp-carousel__track"
+          :style="trackStyle"
           @transitionend.self="afterTransition"
         >
           <slot></slot>
         </div>
         <div
+          class="vcomp-carousel__track--sub"
           v-if="loop"
           :style="subTrackStyle"
-          class="vcomp-carousel__track--sub"
         >
           <slot></slot>
         </div>
       </div>
     </div>
+    <ul :class="['vcomp-carousel__dots', `vcomp-carousel__dots--${direction}`]">
+      <li
+        v-for="index in counts"
+        :key="index"
+      >
+        <div
+          :class="[
+            'vcomp-carousel__dot',
+            `vcomp-carousel__dot--${direction}`,
+            { 'active': index - 1 === activeIndex }]"
+          @click="handleDotClick(index - 1)"
+          @mouseenter="handleDotHover(index - 1)"
+        >
+        </div>
+      </li>
+    </ul>
   </div>
 </template>
 
@@ -63,10 +79,6 @@ export default {
   name: 'Carousel',
   components: {
     Icon
-  },
-  model: {
-    prop: 'initialIndex',
-    event: 'change'
   },
   props: {
     initialIndex: {
@@ -89,6 +101,13 @@ export default {
       default: 'inside',
       validator(value) {
         return ['inside', 'never'].indexOf(value) !== -1
+      }
+    },
+    trigger: {
+      type: String,
+      default: 'click',
+      validator(value) {
+        return ['click', 'hover'].indexOf(value) !== -1
       }
     },
     direction: {
@@ -115,6 +134,7 @@ export default {
     return {
       items: [],
       activeItem: this.initialIndex,
+      activeIndex: +this.initialIndex,
       hover: false,
       itemWidth: 0,
       itemHeight: 0,
@@ -151,11 +171,7 @@ export default {
       }
     },
     trackStyleBase() {
-      const {
-        direction,
-        counts,
-        transition
-      } = this
+      const { direction, counts, transition } = this
 
       return {
         width: direction === 'horizontal' ? `${this.itemWidth * counts}px` : 'auto',
@@ -194,13 +210,12 @@ export default {
     autoPlay(value) {
       value ? this.startTimer() : this.parseTimer()
     },
-    activeItem(value) {
-      if (value === this.counts) return
-
+    activeIndex(value) {
       this.$emit('change', value)
     },
     initialIndex(value) {
       this.activeItem = value
+      this.activeIndex = value
     }
   },
   mounted() {
@@ -215,6 +230,13 @@ export default {
     clearTimeout(this.timeout)
   },
   methods: {
+    setActiveItem(index) {
+      this.activeItem = index
+      this.activeIndex = index
+
+      this.transition = true
+      this.isAnimating = true
+    },
     handleMouseEnter() {
       this.hover = true
       this.parseTimer()
@@ -233,26 +255,51 @@ export default {
         }
 
         this.timeout = setTimeout(() => {
-          this.moveActiveItem(-1)
-        }, 20)
+          this.moveActiveItem(0)
+        }, 0)
       } else {
-        this.moveActiveItem(-1)
+        this.moveActiveItem(0)
       }
+
+      this.changeActiveIndex(0)
     },
     handleNextClick() {
-      if ((this.activeItem === this.counts - 1 && !this.loop) || this.isAnimating) return
+      if ((this.activeItem === this.counts - 1 && !this.loop) || this.isAnimating)
+        return
 
       this.moveActiveItem(1)
+      this.changeActiveIndex(1)
+    },
+    handleDotClick(value) {
+      if (this.trigger === 'click') {
+        this.setActiveItem(value)
+      }
+    },
+    handleDotHover(value) {
+      if (this.trigger === 'hover') {
+        this.setActiveItem(value)
+      }
     },
     moveActiveItem(value) {
-      switch(value) {
-        case -1: {
-          this.activeItem--
-          break
+      value ? this.activeItem++ : this.activeItem--
+
+      this.transition = true
+      this.isAnimating = true
+    },
+    changeActiveIndex(value) {
+      const { counts } = this
+
+      if (value) {
+        if (this.activeIndex === counts - 1) {
+          this.activeIndex = 0
+        } else {
+          this.activeIndex++
         }
-        case 1: {
-          this.activeItem++
-          break
+      } else {
+        if (this.activeIndex === 0) {
+          this.activeIndex = counts - 1
+        } else {
+          this.activeIndex--
         }
       }
 
@@ -281,17 +328,22 @@ export default {
       }
     },
     playSlides() {
+      const { counts } = this
+
       if (this.loop) {
-        if (this.activeItem === this.counts) {
+        if (this.activeItem === counts) {
           this.activeItem = 0
           this.transition = false
         } else {
           this.activeItem++
           this.transition = true
         }
+
+        this.activeIndex === counts - 1 ? this.activeIndex = 0 : this.activeIndex++
       } else {
-        if (this.activeItem < this.counts - 1) {
+        if (this.activeItem < counts - 1) {
           this.activeItem++
+          this.activeIndex++
           this.transition = true
         } else {
           this.parseTimer()
@@ -299,27 +351,21 @@ export default {
       }
     },
     updateItems() {
-      this.items = this.$children.filter(child => child.$options.name === CarouselItem.name)
+      this.items = this.$children.filter(
+        child => child.$options.name === CarouselItem.name
+      )
     },
     updateListSize() {
-      if (this.direction === 'horizontal') {
-        this.listWidth = this.$el.offsetWidth
-      } else {
-        this.listHeight = this.items[0].$el.offsetHeight
-      }
+      const { direction } = this
+
+      this.listWidth = direction === 'horizontal' ? this.$el.offsetWidth : 'auto'
+      this.listHeight = direction === 'horizontal'
+        ? this.items[0].$el.offsetHeight
+        : 'auto'
     },
     updateItemSize() {
-      let width = 'auto'
-      let height = 'auto'
-
-      if (this.direction === 'horizontal') {
-        width = this.listWidth
-      } else {
-        height = this.listHeight
-      }
-
-      this.itemWidth = width
-      this.itemHeight = height
+      this.itemWidth = this.direction === 'horizontal' ? this.listWidth : 'auto'
+      this.itemHeight = this.direction === 'horizontal' ? 'auto' : this.listHeight
     },
     refresh() {
       this.updateListSize()

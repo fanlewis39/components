@@ -26,7 +26,6 @@
       :auto-play="false"
       :loop="true"
       height="200"
-      v-model="index"
       @change="handleChange"
       @select="handleSelect"
     >
@@ -43,6 +42,11 @@
       <CarouselItem item-class="aa">
         <div class="carousel-demo">
           3
+        </div>
+      </CarouselItem>
+      <CarouselItem item-class="aa">
+        <div class="carousel-demo">
+          4
         </div>
       </CarouselItem>
     </Carousel>
@@ -82,7 +86,7 @@ export default {
   },
   data() {
     return {
-      active: false,
+      active: true,
       index: 0
     }
   },
@@ -94,10 +98,10 @@ export default {
       this.active = !this.active
     },
     handleChange(val) {
-      console.log(val)
+      // console.log(val)
     },
     handleSelect(val) {
-      console.log(val)
+      // console.log(val)
     }
   }
 }
