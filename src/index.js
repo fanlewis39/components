@@ -1,10 +1,12 @@
-import Carousel from './packages/carousel'
-import CarouselItem from './packages/carousel-item'
-import Curtain from './packages/curtain'
-import DragBox from './packages/drag-box'
-import Icon from './packages/icon'
+import Button from './components/button'
+import Carousel from './components/carousel'
+import CarouselItem from './components/carousel-item'
+import Curtain from './components/curtain'
+import DragBox from './components/drag-box'
+import Icon from './components/icon'
 
 const components = [
+  Button,
   Carousel,
   CarouselItem,
   Curtain,
@@ -22,6 +24,7 @@ if (window && window.Vue) {
 }
 
 export {
+  Button,
   Carousel,
   CarouselItem,
   Curtain,

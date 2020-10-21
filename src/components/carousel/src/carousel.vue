@@ -1,5 +1,8 @@
 <template>
-  <div :class="['vcomp-carousel', `vcomp-carousel--${direction}`]">
+  <div
+    class="vcomp-carousel"
+    :class="`vcomp-carousel--${direction}`"
+  >
     <div
       class="vcomp-carousel__wrapper"
       :style="{ height: height + 'px' }"
@@ -12,8 +15,9 @@
       >
         <button 
           type="button"
+          class="vcomp-carousel__arrow"
           v-show="arrow === 'always' || hover"
-          :class="['vcomp-carousel__arrow', `vcomp-carousel__arrow--${arrowList[0]}`]"
+          :class="`vcomp-carousel__arrow--${arrowList[0]}`"
           @click="handlePrevClick"
         >
           <Icon :name="`angle-${arrowList[0]}`"></Icon>
@@ -25,8 +29,9 @@
       >
         <button 
           type="button"
+          class="vcomp-carousel__arrow"
           v-show="arrow === 'always' || hover"
-          :class="['vcomp-carousel__arrow', `vcomp-carousel__arrow--${arrowList[1]}`]"
+          :class="`vcomp-carousel__arrow--${arrowList[1]}`"
           @click="handleNextClick"
         >
           <Icon :name="`angle-${arrowList[1]}`"></Icon>
@@ -52,14 +57,17 @@
         </div>
       </div>
     </div>
-    <ul :class="['vcomp-carousel__dots', `vcomp-carousel__dots--${direction}`]">
+    <ul
+      class="vcomp-carousel__dots"
+      :class="`vcomp-carousel__dots--${direction}`"
+    >
       <li
         v-for="index in counts"
         :key="index"
       >
         <div
+          class="vcomp-carousel__dot"
           :class="[
-            'vcomp-carousel__dot',
             `vcomp-carousel__dot--${direction}`,
             { 'active': index - 1 === activeIndex }]"
           @click="handleDotClick(index - 1)"

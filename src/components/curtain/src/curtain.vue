@@ -11,7 +11,7 @@
       >
         <div
           class="vcomp-curtain__handle"
-          :class="[ 'vcomp-curtain__handle--' + direction ]"
+          :class="`vcomp-curtain__handle--${direction}`"
           @mousedown.left.prevent="enlargeWrapper"
         ></div>
         <div
@@ -163,7 +163,9 @@ export default {
           ? baseWidth + event.clientX - clientX
           : baseWidth + clientX - event.clientX
         this.wrapperWidth = this.wrapperWidth > width ? this.wrapperWidth : width
-        this.wrapperWidth = this.wrapperWidth > clientWidth - 5 ? clientWidth - 5 : this.wrapperWidth
+        this.wrapperWidth = this.wrapperWidth > clientWidth - 5
+          ? clientWidth - 5
+          : this.wrapperWidth
       } else {
         const { clientHeight } = this
         const { baseHeight, clientY } = this.mouseState
@@ -172,7 +174,9 @@ export default {
           ? baseHeight + event.clientY - clientY
           : baseHeight + clientY - event.clientY
         this.wrapperHeight = this.wrapperHeight > height ? this.wrapperHeight : height
-        this.wrapperHeight = this.wrapperHeight > this.clientHeight - 5 ? clientHeight - 5 : this.wrapperHeight
+        this.wrapperHeight = this.wrapperHeight > this.clientHeight - 5
+          ? clientHeight - 5
+          : this.wrapperHeight
       }
     },
     handleMouseUp() {

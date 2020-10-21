@@ -1,6 +1,7 @@
 <template>
   <div
-    :class="['vcomp-carousel-item', itemClass]"
+    class="vcomp-carousel-item"
+    :class="itemClass"
     style="width: auto; width: auto"
     @click="handleClick"
   >

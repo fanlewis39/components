@@ -15,14 +15,14 @@
     <!-- <button @click="handleClick">
       test
     </button> -->
-    <!-- <DragBox
+    <DragBox
       v-model="active"
       :box-class="['drag-text', 'a']"
       title="title"
     >
       aaa
-    </DragBox> -->
-    <Carousel
+    </DragBox>
+    <!-- <Carousel
       :auto-play="false"
       :loop="true"
       height="200"
@@ -49,28 +49,14 @@
           4
         </div>
       </CarouselItem>
-    </Carousel>
-    <!-- <Carousel
-      :auto-play="false"
-      :loop="true"
-      direction="vertical"
-    >
-      <CarouselItem>
-        <div class="carousel-image-demo">
-          <img src="./image/1.jpg" />
-        </div>
-      </CarouselItem>
-      <CarouselItem>
-        <div class="carousel-image-demo">
-          <img src="./image/2.jpg" />
-        </div>
-      </CarouselItem>
-      <CarouselItem>
-        <div class="carousel-image-demo">
-          <img src="./image/3.jpg" />
-        </div>
-      </CarouselItem>
     </Carousel> -->
+    <Button
+      type="danger"
+      plain
+      @click="handleClick"
+    >
+      默认按钮
+    </Button>
   </div>
 </template>
 
@@ -86,7 +72,7 @@ export default {
   },
   data() {
     return {
-      active: true,
+      active: false,
       index: 0
     }
   },
@@ -117,12 +103,6 @@ html, body {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-}
-
-button {
-  position: absolute;
-  top: 10px;
-  right: 10px;
 }
 
 .drag-text {
