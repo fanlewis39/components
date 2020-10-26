@@ -1,7 +1,7 @@
-import carouselItem from '../carousel/src/carousel-item.vue'
+import CarouselItem from '../carousel/src/carousel-item.vue'
 
-carouselItem.install = Vue => {
-  Vue.component(carouselItem.name, carouselItem)
+CarouselItem.install = Vue => {
+  Vue.component(CarouselItem.name, CarouselItem)
 }
 
-export default carouselItem
+export default CarouselItem

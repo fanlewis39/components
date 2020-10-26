@@ -4,22 +4,22 @@
   &--inner {
     position: absolute;
   }
+}
 
-  &__wrapper {
-    box-shadow: 0 1px 4px rgb(185 185 185);
+.vcomp-curtain__wrapper {
+  box-shadow: 0 1px 4px rgb(185 185 185);
+}
+
+.vcomp-curtain__handle {
+  position: absolute;
+  background-color: rgb(179 174 174);
+  cursor: pointer;
+
+  &:hover {
+    background-color: rgb(132 130 130);
   }
 
-  &__handle {
-    position: absolute;
-    background-color: rgb(179 174 174);
-    cursor: pointer;
-
-    &:hover {
-      background-color: rgb(132 130 130);
-    }
-  }
-
-  &__handle--top {
+  &--top {
     width: 80px;
     height: 5px;
     top: -5px;
@@ -28,7 +28,7 @@
     transform: translateX(-50%);
   }
 
-  &__handle--right {
+  &--right {
     width: 5px;
     height: 80px;
     top: 50%;
@@ -37,7 +37,7 @@
     transform: translateY(-50%);
   }
 
-  &__handle--bottom {
+  &--bottom {
     width: 80px;
     height: 5px;
     bottom: -5px;
@@ -46,7 +46,7 @@
     transform: translateX(-50%);
   }
 
-  &__handle--left {
+  &--left {
     width: 5px;
     height: 80px;
     top: 50%;

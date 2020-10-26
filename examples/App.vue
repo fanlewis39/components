@@ -15,13 +15,13 @@
     <!-- <button @click="handleClick">
       test
     </button> -->
-    <DragBox
+    <!-- <DragBox
       v-model="active"
       :box-class="['drag-text', 'a']"
       title="title"
     >
       aaa
-    </DragBox>
+    </DragBox> -->
     <!-- <Carousel
       :auto-play="false"
       :loop="true"
@@ -50,12 +50,46 @@
         </div>
       </CarouselItem>
     </Carousel> -->
+    <ButtonGroup>
+      <Button
+        plain
+        size="mini"
+        icon="arrow-left"
+      >
+      </Button>
+      <Button
+        size="mini"
+        icon="arrow-left"
+      >
+      </Button>
+      <Button
+        type="primary"
+        size="mini"
+        icon="arrow-right"
+      >
+      </Button>
+      <Button
+        type="info"
+        size="mini"
+        icon="arrow-right"
+      >
+      </Button>
+    </ButtonGroup>
+    <ButtonGroup style="margin-left: 10px">
+      <Button
+        plain
+        size="mini"
+        icon="arrow-left"
+        disabled
+      >
+      </Button>
+    </ButtonGroup>
     <Button
-      type="danger"
       plain
-      @click="handleClick"
+      type="danger"
+      size="mini"
+      icon="arrow-left"
     >
-      默认按钮
     </Button>
   </div>
 </template>
@@ -81,7 +115,8 @@ export default {
       console.log('111')
     },
     handleClick() {
-      this.active = !this.active
+      // this.active = !this.active
+      debugger
     },
     handleChange(val) {
       // console.log(val)

@@ -1,4 +1,5 @@
 import Button from './components/button'
+import ButtonGroup from './components/button-group'
 import Carousel from './components/carousel'
 import CarouselItem from './components/carousel-item'
 import Curtain from './components/curtain'
@@ -7,6 +8,7 @@ import Icon from './components/icon'
 
 const components = [
   Button,
+  ButtonGroup,
   Carousel,
   CarouselItem,
   Curtain,
@@ -25,6 +27,7 @@ if (window && window.Vue) {
 
 export {
   Button,
+  ButtonGroup,
   Carousel,
   CarouselItem,
   Curtain,

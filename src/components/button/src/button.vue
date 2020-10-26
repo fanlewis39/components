@@ -3,8 +3,9 @@
     class="vcomp-button"
     :class="[
       `vcomp-button--${type}`,
+      size ? `vcomp-button-${size}` : '',
       {
-        'is-disabled': buttonDisabled,
+        'is-disabled': disabled,
         'is-loading': loading,
         'is-plain': plain,
         'is-round': round,
@@ -12,10 +13,16 @@
       }
     ]"
     :type="nativeType"
+    :disabled="disabled || loading"
+    :autofocus="autofocus"
     @click="handleClick"
   >
     <Icon
-      v-if="icon"
+      v-if="loading"
+      name="spinner"
+    ></Icon>
+    <Icon
+      v-if="icon && !loading"
       :name="icon"
     ></Icon>
     <span v-if="$slots.default"><slot></slot></span>
@@ -66,12 +73,13 @@ export default {
     circle: {
       type: Boolean,
       default: false
+    },
+    size: {
+      type: String,
+      default: null
     }
   },
   computed: {
-    buttonDisabled() {
-      return this.disabled
-    }
   },
   methods: {
     handleClick(event) {

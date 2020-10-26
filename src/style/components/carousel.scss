@@ -1,111 +1,107 @@
-.vcomp-carousel {
-  user-select: none;
+.vcomp-carousel__arrow {
+  border: none;
+  outline: none;
+  padding: 0;
+  margin: 0;
+  height: 35px;
+  width: 35px;
+  cursor: pointer;
+  transition: 0.3s;
+  border-radius: 50%;
+  background-color: rgba(31, 45, 61, 0.11);
+  color: #fff;
+  position: absolute;
+  z-index: 10;
 
-  &__arrow {
-    border: none;
-    outline: none;
-    padding: 0;
-    margin: 0;
-    height: 35px;
-    width: 35px;
-    cursor: pointer;
-    transition: 0.3s;
-    border-radius: 50%;
-    background-color: rgba(31, 45, 61, 0.11);
-    color: #fff;
-    position: absolute;
-    z-index: 10;
+  &:hover {
+    background-color: rgba(31, 45, 61, 0.23);
+  }
 
-    &:hover {
-      background-color: rgba(31, 45, 61, 0.23);
-    }
+  &--left {
+    top: 50%;
+    left: 15px;
+    transform: translate(0, -50%);
+  }
 
-    &--left {
-      top: 50%;
-      left: 15px;
-      transform: translate(0, -50%);
-    }
+  &--right {
+    top: 50%;
+    right: 15px;
+    transform: translate(0, -50%);
+  }
 
-    &--right {
-      top: 50%;
-      right: 15px;
-      transform: translate(0, -50%);
-    }
+  &--up {
+    top: 15px;
+    left: 50%;
+    transform: translate(-50%, 0);
+  }
 
-    &--up {
-      top: 15px;
-      left: 50%;
-      transform: translate(-50%, 0);
-    }
+  &--down {
+    top: calc(100% - 50px);
+    left: 50%;
+    transform: translate(-50%, 0);
+  }
+}
 
-    &--down {
-      top: calc(100% - 50px);
-      left: 50%;
-      transform: translate(-50%, 0);
+.vcomp-carousel__list {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+}
+
+.vcomp-carousel__track,
+.vcomp-carousel__track--sub {
+  left: 0;
+  top: 0;
+}
+
+.vcomp-carousel__track--sub {
+  position: absolute;
+}
+
+.vcomp-carousel__dots {
+  position: absolute;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  z-index: 2;
+
+  &--horizontal {
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+
+    li {
+      display: inline-block;
     }
   }
 
-  &__list {
-    position: relative;
-    overflow: hidden;
-    display: flex;
+  &--vertical {
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+}
+
+.vcomp-carousel__dot {
+  background-color: #8391a5;
+  cursor: pointer;
+  opacity: 0.35;
+
+  &--horizontal {
+    width: 30px;
+    height: 3px;
+    margin: 0 2px;
   }
 
-  &__track,
-  &__track--sub {
-    left: 0;
-    top: 0;
+  &--vertical {
+    width: 3px;
+    height: 20px;
+    margin: 5px 0;
   }
 
-  &__track--sub {
-    position: absolute;
-  }
-
-  &__dots {
-    position: absolute;
-    margin: 0;
-    padding: 0;
-    list-style: none;
-    z-index: 2;
-
-    &--horizontal {
-      bottom: 10px;
-      left: 50%;
-      transform: translateX(-50%);
-      
-      li {
-        display: inline-block;
-      }
-    }
-
-    &--vertical {
-      right: 15px;
-      top: 50%;
-      transform: translateY(-50%);
-    }
-  }
-
-  &__dot {
-    background-color: #8391a5;
-    cursor: pointer;
-    opacity: 0.35;
-
-    &--horizontal {
-      width: 30px;
-      height: 3px;
-      margin: 0 2px;
-    }
-
-    &--vertical {
-      width: 3px;
-      height: 20px;
-      margin: 5px 0;
-    }
-
-    &.active {
-      background-color: #c3bfbf;
-      opacity: 1;
-      transition: all 150ms;
-    }
+  &.active {
+    background-color: #c3bfbf;
+    opacity: 1;
+    transition: all 150ms;
   }
 }
