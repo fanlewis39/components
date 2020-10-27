@@ -5,8 +5,8 @@
   >
     <transition :name="transitionName">
       <div
-        v-show="currentActive"
         class="vcomp-curtain__wrapper"
+        v-show="currentActive"
         :style="wrapperStyle"
       >
         <div

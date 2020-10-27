@@ -5,8 +5,8 @@
   >
     <transition name="vcomp-fade">
       <div
-        v-show="currentActive"
         class="vcomp-drag-box__wrapper"
+        v-show="currentActive"
         :style="{ 
           width: `${width}px`,
           height: `${height}px`,

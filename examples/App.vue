@@ -1,5 +1,9 @@
 <template>
   <div id="app">
+    <Checkbox v-model="checked">
+      aa
+    </Checkbox>
+    <Checkbox :label="11"></Checkbox>
     <!-- <Curtain
       direction="right"
       curtain-class="curtain-test"
@@ -50,7 +54,7 @@
         </div>
       </CarouselItem>
     </Carousel> -->
-    <ButtonGroup>
+    <!-- <ButtonGroup>
       <Button
         plain
         size="mini"
@@ -90,7 +94,7 @@
       size="mini"
       icon="arrow-left"
     >
-    </Button>
+    </Button> -->
   </div>
 </template>
 
@@ -107,7 +111,8 @@ export default {
   data() {
     return {
       active: false,
-      index: 0
+      index: 0,
+      checked: true
     }
   },
   methods: {

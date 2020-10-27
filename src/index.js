@@ -2,6 +2,7 @@ import Button from './components/button'
 import ButtonGroup from './components/button-group'
 import Carousel from './components/carousel'
 import CarouselItem from './components/carousel-item'
+import CheckBox from './components/checkbox'
 import Curtain from './components/curtain'
 import DragBox from './components/drag-box'
 import Icon from './components/icon'
@@ -11,6 +12,7 @@ const components = [
   ButtonGroup,
   Carousel,
   CarouselItem,
+  CheckBox,
   Curtain,
   DragBox,
   Icon
@@ -30,6 +32,7 @@ export {
   ButtonGroup,
   Carousel,
   CarouselItem,
+  CheckBox,
   Curtain,
   DragBox,
   Icon

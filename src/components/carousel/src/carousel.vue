@@ -49,8 +49,8 @@
           <slot></slot>
         </div>
         <div
-          class="vcomp-carousel__track--sub"
           v-if="loop"
+          class="vcomp-carousel__track--sub"
           :style="subTrackStyle"
         >
           <slot></slot>
@@ -141,8 +141,8 @@ export default {
   data() {
     return {
       items: [],
-      activeItem: this.initialIndex,
-      activeIndex: +this.initialIndex,
+      activeItem: this.initialIndex, /* 控制当前显示的item */
+      activeIndex: +this.initialIndex, /* 当前显示item的索引 */
       hover: false,
       itemWidth: 0,
       itemHeight: 0,
