@@ -3,7 +3,7 @@
     class="vcomp-button"
     :class="[
       `vcomp-button--${type}`,
-      size ? `vcomp-button-${size}` : '',
+      size ? `vcomp-button--${size}` : '',
       {
         'is-disabled': disabled,
         'is-loading': loading,
@@ -40,7 +40,10 @@ export default {
   props: {
     type: {
       type: String,
-      default: 'default'
+      default: 'default',
+      validator(value) {
+        return ['primary', 'success', 'warning', 'danger', 'info', 'text'].includes(value)
+      }
     },
     icon: {
       type: String,
@@ -76,10 +79,11 @@ export default {
     },
     size: {
       type: String,
-      default: null
+      default: null,
+      validator(value) {
+        return ['medium', 'small', 'mini'].includes(value)
+      }
     }
-  },
-  computed: {
   },
   methods: {
     handleClick(event) {

@@ -1,11 +1,12 @@
-import Button from './components/button'
-import ButtonGroup from './components/button-group'
-import Carousel from './components/carousel'
-import CarouselItem from './components/carousel-item'
-import CheckBox from './components/checkbox'
-import Curtain from './components/curtain'
-import DragBox from './components/drag-box'
-import Icon from './components/icon'
+import Button from '../components/button'
+import ButtonGroup from '../components/button-group'
+import Carousel from '../components/carousel'
+import CarouselItem from '../components/carousel-item'
+import CheckBox from '../components/checkbox'
+import Curtain from '../components/curtain'
+import DragBox from '../components/drag-box'
+import Icon from '../components/icon'
+import Radio from '../components/radio'
 
 const components = [
   Button,
@@ -15,7 +16,8 @@ const components = [
   CheckBox,
   Curtain,
   DragBox,
-  Icon
+  Icon,
+  Radio
 ]
 
 const install = Vue => {
@@ -35,7 +37,8 @@ export {
   CheckBox,
   Curtain,
   DragBox,
-  Icon
+  Icon,
+  Radio
 }
 
 export default {

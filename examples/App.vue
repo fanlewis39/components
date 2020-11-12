@@ -1,9 +1,11 @@
 <template>
   <div id="app">
-    <Checkbox v-model="checked">
+    <Radio label='1' v-model="radio">选项1</Radio>
+    <Radio label='2' v-model="radio">选项2</Radio>
+    <!-- <Checkbox v-model="checked">
       aa
     </Checkbox>
-    <Checkbox :label="11"></Checkbox>
+    <Checkbox :label="11"></Checkbox> -->
     <!-- <Curtain
       direction="right"
       curtain-class="curtain-test"
@@ -48,11 +50,6 @@
           3
         </div>
       </CarouselItem>
-      <CarouselItem item-class="aa">
-        <div class="carousel-demo">
-          4
-        </div>
-      </CarouselItem>
     </Carousel> -->
     <!-- <ButtonGroup>
       <Button
@@ -87,10 +84,10 @@
         disabled
       >
       </Button>
-    </ButtonGroup>
-    <Button
-      plain
-      type="danger"
+    </ButtonGroup> -->
+    <!-- <Button
+      disabled
+      type="text"
       size="mini"
       icon="arrow-left"
     >
@@ -112,7 +109,8 @@ export default {
     return {
       active: false,
       index: 0,
-      checked: true
+      checked: true,
+      radio: '1'
     }
   },
   methods: {
@@ -127,7 +125,7 @@ export default {
       // console.log(val)
     },
     handleSelect(val) {
-      // console.log(val)
+      console.log(val)
     }
   }
 }

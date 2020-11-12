@@ -10,6 +10,9 @@
 </template>
 
 <script>
+import Emitter from '../../../src/mixins/emitter'
+import Carousel from './carousel'
+
 export default {
   name: 'CarouselItem',
   props: {
@@ -18,6 +21,7 @@ export default {
       default: null
     }
   },
+  mixins: [Emitter],
   data() {
     return {
       parent: null
@@ -32,10 +36,10 @@ export default {
     handleClick() {
       const { parent } = this
 
-      if (parent) {
+      if (parent && parent.$options.name === Carousel.name) {
         const index = parent.items.findIndex(item => item === this)
 
-        parent.$emit('select', index)
+        this.dispatch(Carousel.name, 'select', index)
       }
     }
   }

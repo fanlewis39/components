@@ -14,13 +14,11 @@
       <input
         v-if="trueValue || falseValue"
         type="checkbox"
-        :aria-hidden="indeterminate"
         :disabled="isDisabled"
       />
       <input
         v-else
         type="checkbox"
-        :aria-hidden="indeterminate"
         :disabled="isDisabled"
       />
     </span>
@@ -39,7 +37,7 @@ export default {
   name: 'Checkbox',
   props: {
     value: {
-      type: Object,
+      type: Boolean,
       default: () => {
         return {}
       }
@@ -47,10 +45,6 @@ export default {
     label: {
       type: [String, Number],
       default: ''
-    },
-    indeterminate: {
-      type: Boolean,
-      default: false /* 用以表示 checkbox 的不确定状态，一般用于实现全选的效果 */
     },
     disabled: {
       type: Boolean,

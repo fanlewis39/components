@@ -101,28 +101,28 @@ export default {
       type: String,
       default: 'hover',
       validator(value) {
-        return ['hover', 'always', 'never'].indexOf(value) !== -1
+        return ['hover', 'always', 'never'].includes(value)
       }
     },
     dots: {
       type: String,
       default: 'inside',
       validator(value) {
-        return ['inside', 'never'].indexOf(value) !== -1
+        return ['inside', 'never'].includes(value)
       }
     },
     trigger: {
       type: String,
       default: 'click',
       validator(value) {
-        return ['click', 'hover'].indexOf(value) !== -1
+        return ['click', 'hover'].includes(value)
       }
     },
     direction: {
       type: String,
       default: 'horizontal',
       validator(value) {
-        return ['horizontal', 'vertical'].indexOf(value) !== -1
+        return ['horizontal', 'vertical'].includes(value)
       }
     },
     loop: {
@@ -264,7 +264,7 @@ export default {
 
         this.timeout = setTimeout(() => {
           this.moveActiveItem(0)
-        }, 0)
+        }, 50)
       } else {
         this.moveActiveItem(0)
       }
@@ -310,9 +310,6 @@ export default {
           this.activeIndex--
         }
       }
-
-      this.transition = true
-      this.isAnimating = true
     },
     afterTransition() {
       if (this.activeItem === this.counts) {

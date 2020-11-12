@@ -55,7 +55,7 @@ export default {
       type: String,
       default: 'right',
       validator(value) {
-        return ['top', 'right', 'bottom', 'left'].indexOf(value) !== -1
+        return ['top', 'right', 'bottom', 'left'].includes(value)
       }
     },
     inner: {

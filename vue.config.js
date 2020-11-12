@@ -15,6 +15,7 @@ module.exports = {
   },
   // 为components目录添加babel-loader处理
   chainWebpack: config => {
+    config.resolve.symlinks(true)
     config.module
     .rule('js')
     .include
