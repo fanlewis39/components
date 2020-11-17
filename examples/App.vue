@@ -1,7 +1,27 @@
 <template>
   <div id="app">
-    <Radio label='1' v-model="radio">选项1</Radio>
-    <Radio label='2' v-model="radio">选项2</Radio>
+    <RadioGroup
+      v-model="radio"
+      border
+      size="mini"
+    >
+      <Radio
+        v-for="item in radioItems"
+        :key="item"
+        :label="item"
+      >
+        {{ item }}
+      </Radio>
+    </RadioGroup>
+    <!-- <Radio label='1' v-model="radio">
+      选项1
+    </Radio>
+    <Radio label='2' v-model="radio">
+      选项2
+    </Radio> -->
+    <!-- <Radio label='1' v-model="radio">
+      选项1
+    </Radio> -->
     <!-- <Checkbox v-model="checked">
       aa
     </Checkbox>
@@ -103,6 +123,9 @@ export default {
   watch: {
     active(value) {
       console.log(value)
+    },
+    radio() {
+      // debugger
     }
   },
   data() {
@@ -110,7 +133,8 @@ export default {
       active: false,
       index: 0,
       checked: true,
-      radio: '1'
+      radio: '选项1',
+      radioItems: ['选项1', '选项2', '选项3']
     }
   },
   methods: {
@@ -135,6 +159,8 @@ export default {
 
 html, body {
   margin: 0;
+  width: 100%;
+  height: 100%;
 }
 
 #app {

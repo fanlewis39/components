@@ -7,6 +7,7 @@ import Curtain from '../components/curtain'
 import DragBox from '../components/drag-box'
 import Icon from '../components/icon'
 import Radio from '../components/radio'
+import RadioGroup from '../components/radio-group'
 
 const components = [
   Button,
@@ -17,7 +18,8 @@ const components = [
   Curtain,
   DragBox,
   Icon,
-  Radio
+  Radio,
+  RadioGroup
 ]
 
 const install = Vue => {
@@ -38,7 +40,8 @@ export {
   Curtain,
   DragBox,
   Icon,
-  Radio
+  Radio,
+  RadioGroup
 }
 
 export default {

@@ -1,14 +1,10 @@
 <template>
   <label
     class="vcomp-radio"
-    role="radio"
-    :class="[
-      {
-        'is-disabled': isDisabled,
-        'is-checked': currentValue === label,
-        'is-bordered': border
-      }
-    ]"
+    :class="{
+      'is-disabled': isDisabled,
+      'is-checked': currentValue === label
+    }"
   >
     <span
       class="vcomp-radio__input"
@@ -20,10 +16,8 @@
       <span class="vcomp-radio__inner"></span>
       <input
         type="radio"
-        ref="radio"
         class="vcomp-radio__original"
-        v-model="currentValue"
-        :checked="true"
+        :checked="currentValue === label"
         :disabled="isDisabled"
         @change="handleChange"
       />
@@ -36,7 +30,9 @@
 </template>
 
 <script>
+
 import Emitter from '../../../src/mixins/emitter'
+import RadioGroup from '../../radio-group'
 
 export default {
   name: 'Radio',
@@ -53,18 +49,7 @@ export default {
       default: '',
       required: true
     },
-    size: {
-      type: String,
-      default: null,
-      validator(value) {
-        return ['medium', 'small', 'mini'].includes(value)
-      }
-    },
     disabled: {
-      type: Boolean,
-      default: false
-    },
-    border: {
       type: Boolean,
       default: false
     }
@@ -72,37 +57,11 @@ export default {
   mixins: [Emitter],
   data() {
     return {
-      currentValue: this.value
+      currentValue: '',
+      isGroup: false
     }
   },
   computed: {
-    isGroup() {
-      let parent = this.$parent
-
-      while (parent) {
-        if (parent.$options.name !== 'RadioGroup') {
-          parent = parent.$parent
-        } else {
-          return true
-        }
-      }
-
-      return false
-    },
-    // currentValue: {
-    //   get() {
-    //     return this.isGroup ? this._radioGroup.value : this.value
-    //   },
-    //   set(value) {
-    //     if (this.isGroup) {
-    //       this.dispatch('RadioGroup', 'input', [value])
-    //     } else {
-    //       this.$emit('input', value)
-    //     }
-
-    //     this.$refs.radio.checked = this.currentValue === this.label
-    //   }
-    // },
     isDisabled() {
       return this.isGroup
         ? this._radioGroup.disabled || this.disabled
@@ -110,17 +69,33 @@ export default {
     }
   },
   watch: {
-    isGroup(value) {
-      if (value) {
-        this._radioGroup = parent
-      }
+    value(value) {
+      this.currentValue = value
     }
+  },
+  mounted() {
+    this.$nextTick(() => {
+      let parent = this.$parent
+
+      while (parent) {
+        if (parent.$options.name !== RadioGroup.name) {
+          parent = parent.$parent
+        } else {
+          this._radioGroup = parent
+          this.isGroup = true
+          break
+        }
+      }
+
+      this.currentValue = this.isGroup ? this._radioGroup.value : this.value
+    })
+
   },
   methods: {
     handleChange() {
       this.currentValue = this.label
       this.$emit('change', this.currentValue)
-      this.isGroup && this.dispatch('', 'handleChange', this.currentValue)
+      this.isGroup && this.dispatch(RadioGroup.name, 'handleChange', this.currentValue)
     }
   }
 }
