@@ -22,22 +22,13 @@ export default {
     }
   },
   mixins: [Emitter],
-  data() {
-    return {
-      parent: null
-    }
-  },
   mounted() {
-    this.$nextTick(() => {
-      this.parent = this.$parent
-    })
+    this._carousel = this.$parent
   },
   methods: {
     handleClick() {
-      const { parent } = this
-
-      if (parent && parent.$options.name === Carousel.name) {
-        const index = parent.items.findIndex(item => item === this)
+      if (this._carousel && this._carousel.$options.name === Carousel.name) {
+        const index = this._carousel.items.findIndex(item => item === this)
 
         this.dispatch(Carousel.name, 'select', index)
       }

@@ -66,9 +66,7 @@ export default {
   },
   watch: {
     value(value) {
-      Object.keys(this.items).forEach(key => {
-        this.items[key].currentValue = value
-      })
+      this.items.map(item => item.currentValue = value)
     }
   },
   methods: {

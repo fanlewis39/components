@@ -74,22 +74,19 @@ export default {
     }
   },
   mounted() {
-    this.$nextTick(() => {
-      let parent = this.$parent
+    let parent = this.$parent
 
-      while (parent) {
-        if (parent.$options.name !== RadioGroup.name) {
-          parent = parent.$parent
-        } else {
-          this._radioGroup = parent
-          this.isGroup = true
-          break
-        }
+    while (parent) {
+      if (parent.$options.name !== RadioGroup.name) {
+        parent = parent.$parent
+      } else {
+        this._radioGroup = parent
+        this.isGroup = true
+        break
       }
+    }
 
-      this.currentValue = this.isGroup ? this._radioGroup.value : this.value
-    })
-
+    this.currentValue = this.isGroup ? this._radioGroup.value : this.value
   },
   methods: {
     handleChange() {

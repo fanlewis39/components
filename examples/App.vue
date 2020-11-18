@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <RadioGroup
+    <!-- <RadioGroup
       v-model="radio"
       border
       size="mini"
@@ -12,11 +12,11 @@
       >
         {{ item }}
       </Radio>
-    </RadioGroup>
-    <!-- <Radio label='1' v-model="radio">
+    </RadioGroup> -->
+    <!-- <Radio label='选项1' v-model="radio">
       选项1
     </Radio>
-    <Radio label='2' v-model="radio">
+    <Radio label='选项2' v-model="radio">
       选项2
     </Radio> -->
     <!-- <Radio label='1' v-model="radio">
