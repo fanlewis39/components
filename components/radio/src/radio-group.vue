@@ -4,10 +4,9 @@
     :class="[
       {
         'vcomp-radio-group--button' : button,
-        'vcomp-radio-group--border' : border,
         'vcomp-radio-group--vertical' : vertical && !button
       },
-      ( size && button ) || ( size && border ) ? `vcomp-radio-group--${size}` : ''
+      size ? `vcomp-radio-group--${size}` : ''
     ]"
   >
     <slot></slot>
@@ -15,8 +14,6 @@
 </template>
 
 <script>
-import Radio from '../../radio'
-
 export default {
   name: 'RadioGroup',
   model: {
@@ -31,10 +28,6 @@ export default {
       type: Boolean,
       default: false
     },
-    border: {
-      type: Boolean,
-      default: false
-    },
     vertical: {
       type: Boolean,
       default: false
@@ -43,7 +36,7 @@ export default {
       type: String,
       default: '',
       validator(value) {
-        return ['medium', 'small', 'mini'].includes(value)
+        return ['medium', 'small', 'mini', ''].includes(value)
       }
     },
     disabled: {
@@ -61,19 +54,9 @@ export default {
       this.$emit('change', value)
     })
   },
-  mounted() {
-    this.updateItems()
-  },
   watch: {
     value(value) {
       this.items.map(item => item.currentValue = value)
-    }
-  },
-  methods: {
-    updateItems() {
-      this.items = this.$children.filter(
-        child => child.$options.name === Radio.name
-      )
     }
   }
 }

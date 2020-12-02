@@ -1,9 +1,11 @@
 // vcomp-fade
-.vcomp-fade-enter-active, .vcomp-fade-leave-active {
-  transition: opacity .5s;
+.vcomp-fade-enter-active,
+.vcomp-fade-leave-active {
+  transition: opacity 0.5s;
 }
 
-.vcomp-fade-enter, .vcomp-fade-leave-to  {
+.vcomp-fade-enter,
+.vcomp-fade-leave-to {
   opacity: 0;
 }
 
@@ -22,7 +24,7 @@
 
 .vcomp-show-left-enter-active,
 .vcomp-show-left-leave-active {
-  transition: all .5s;
+  transition: all 0.5s;
 }
 
 // vcomp-show-right
@@ -40,7 +42,7 @@
 
 .vcomp-show-right-enter-active,
 .vcomp-show-right-leave-active {
-  transition: all .5s;
+  transition: all 0.5s;
 }
 
 // vcomp-show-top
@@ -58,7 +60,7 @@
 
 .vcomp-show-top-enter-active,
 .vcomp-show-top-leave-active {
-  transition: all .5s;
+  transition: all 0.5s;
 }
 
 // vcomp-show-bottom
@@ -76,5 +78,5 @@
 
 .vcomp-show-bottom-enter-active,
 .vcomp-show-bottom-leave-active {
-  transition: all .5s;
+  transition: all 0.5s;
 }

@@ -1,5 +1,7 @@
 const path = require('path')
 
+const StyleLintPlugin = require('stylelint-webpack-plugin')
+
 function resolve(dir) {
   return path.join(__dirname, '..', dir)
 }
@@ -14,8 +16,13 @@ module.exports = {
     }
   },
   // 为components目录添加babel-loader处理
-  chainWebpack: config => {
+  chainWebpack(config) {
+    config
+      .plugin('stylelint')
+      .use(StyleLintPlugin)
+
     config.resolve.symlinks(true)
+
     config.module
     .rule('js')
     .include

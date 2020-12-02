@@ -2,7 +2,7 @@
   <div
     class="vcomp-carousel-item"
     :class="itemClass"
-    style="width: auto; width: auto"
+    style="width: auto; width: auto;"
     @click="handleClick"
   >
     <slot></slot>

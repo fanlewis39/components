@@ -51,21 +51,22 @@
     }
   }
 
-  &.is-disabled,
-  &.is-disabled:focus,
-  &.is-disabled:hover {
+  &.is-disabled {
     color: #c0c4cc;
     cursor: not-allowed;
     background-image: none;
     background-color: #fff;
     border-color: #ebeef5;
-  }
 
-  &.is-disabled.vcomp-button--text {
-    background-color: transparent;
-  }
+    &:focus,
+    &:hover {
+      color: #c0c4cc;
+      cursor: not-allowed;
+      background-image: none;
+      background-color: #fff;
+      border-color: #ebeef5;
+    }
 
-  &.is-disabled {
     &.is-plain,
     &.is-plain:focus,
     &.is-plain:hover {
@@ -75,10 +76,8 @@
     }
   }
 
-  &.is-loading {
-    svg {
-      animation: rotating 1s linear infinite;
-    }
+  &.is-disabled.vcomp-button--text {
+    background-color: transparent;
   }
 
   &.is-round {
@@ -322,15 +321,6 @@
       border-color: #faecd8;
     }
   }
-
-  &.is-disabled,
-  &:active,
-  &:focus,
-  &:hover {
-    color: #fff;
-    background-color: #f3d19e;
-    border-color: #f3d19e;
-  }
 }
 
 .vcomp-button--danger {
@@ -421,6 +411,12 @@
   svg {
     width: 10px;
     height: 10px;
+  }
+}
+
+.vcomp-button.is-loading {
+  svg {
+    animation: rotating 1s linear infinite;
   }
 }
 
