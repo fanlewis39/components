@@ -2,19 +2,21 @@
   <div id="app">
     <!-- <Checkbox
       v-model="checkbox"
+      border
     >
       多选框1
     </Checkbox>
     <Checkbox
       v-model="checkbox"
+      border
     >
       多选框2
     </Checkbox> -->
-    <CheckboxGroup v-model="checkList">
+    <!-- <CheckboxGroup v-model="checkList">
       <Checkbox label="多选框1"></Checkbox>
       <Checkbox label="多选框2"></Checkbox>
       <Checkbox label="多选框3"></Checkbox>
-    </CheckboxGroup>
+    </CheckboxGroup> -->
     <!-- <RadioGroup
       v-model="radio"
       size="small"
@@ -23,17 +25,22 @@
         v-for="item in radioItems"
         :key="item"
         :label="item"
-        border
+        button
       >
         {{ item }}
       </Radio>
     </RadioGroup> -->
-    <!-- <Radio label='选项1' v-model="radio">
+    <Radio
+      label="选项1"
+      v-model="radio"
+      size="mini"
+      border
+    >
       选项1
     </Radio>
-    <Radio label='选项2' v-model="radio">
+    <Radio label="选项2" v-model="radio">
       选项2
-    </Radio> -->
+    </Radio>
     <!-- <Radio label='1' v-model="radio">
       选项1
     </Radio> -->

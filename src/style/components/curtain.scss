@@ -12,45 +12,45 @@
 
 .vcomp-curtain__handle {
   position: absolute;
-  background-color: rgb(179 174 174);
   cursor: pointer;
+  background-color: rgb(179 174 174);
 
   &:hover {
     background-color: rgb(132 130 130);
   }
 
   &--top {
-    width: 80px;
-    height: 5px;
     top: -5px;
     left: 50%;
+    width: 80px;
+    height: 5px;
     border-radius: 6px 6px 0 0;
     transform: translateX(-50%);
   }
 
   &--right {
-    width: 5px;
-    height: 80px;
     top: 50%;
     right: -5px;
+    width: 5px;
+    height: 80px;
     border-radius: 0 6px 6px 0;
     transform: translateY(-50%);
   }
 
   &--bottom {
-    width: 80px;
-    height: 5px;
     bottom: -5px;
     left: 50%;
+    width: 80px;
+    height: 5px;
     border-radius: 0 0 6px 6px;
     transform: translateX(-50%);
   }
 
   &--left {
-    width: 5px;
-    height: 80px;
     top: 50%;
     left: -5px;
+    width: 5px;
+    height: 80px;
     border-radius: 6px 0 0 6px;
     transform: translateY(-50%);
   }

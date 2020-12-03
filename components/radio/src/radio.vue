@@ -1,11 +1,15 @@
 <template>
   <label
     class="vcomp-radio"
-    :class="{
-      'is-disabled': isDisabled,
-      'is-checked': currentValue === label,
-      'is-bordered': border
-    }"
+    :class="[
+      {
+        'is-disabled': isDisabled,
+        'is-checked': currentValue === label,
+        'is-bordered': border,
+        'vcomp-radio--button' : button
+      },
+      size && border ? `vcomp-radio--${size}` : ''
+    ]"
   >
     <span
       class="vcomp-radio__input"
@@ -56,6 +60,17 @@ export default {
     border: {
       type: Boolean,
       default: false
+    },
+    button: {
+      type: Boolean,
+      default: false
+    },
+    size: {
+      type: String,
+      default: '',
+      validator(value) {
+        return ['medium', 'small', 'mini', ''].includes(value)
+      }
     }
   },
   mixins: [Emitter],

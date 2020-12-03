@@ -1,17 +1,17 @@
 .vcomp-carousel__arrow {
-  border: none;
-  outline: none;
-  padding: 0;
-  margin: 0;
-  height: 35px;
-  width: 35px;
-  cursor: pointer;
-  transition: 0.3s;
-  border-radius: 50%;
-  background-color: rgba(31, 45, 61, 0.11);
-  color: #fff;
   position: absolute;
   z-index: 10;
+  width: 35px;
+  height: 35px;
+  padding: 0;
+  margin: 0;
+  color: #fff;
+  cursor: pointer;
+  background-color: rgba(31, 45, 61, 0.11);
+  border: none;
+  border-radius: 50%;
+  outline: none;
+  transition: 0.3s;
 
   &:hover {
     background-color: rgba(31, 45, 61, 0.23);
@@ -44,14 +44,14 @@
 
 .vcomp-carousel__list {
   position: relative;
-  overflow: hidden;
   display: flex;
+  overflow: hidden;
 }
 
 .vcomp-carousel__track,
 .vcomp-carousel__track--sub {
-  left: 0;
   top: 0;
+  left: 0;
 }
 
 .vcomp-carousel__track--sub {
@@ -60,10 +60,10 @@
 
 .vcomp-carousel__dots {
   position: absolute;
-  margin: 0;
-  padding: 0;
-  list-style: none;
   z-index: 2;
+  padding: 0;
+  margin: 0;
+  list-style: none;
 
   &--horizontal {
     bottom: 10px;
@@ -76,15 +76,15 @@
   }
 
   &--vertical {
-    right: 15px;
     top: 50%;
+    right: 15px;
     transform: translateY(-50%);
   }
 }
 
 .vcomp-carousel__dot {
-  background-color: #8391a5;
   cursor: pointer;
+  background-color: #8391a5;
   opacity: 0.35;
 
   &--horizontal {

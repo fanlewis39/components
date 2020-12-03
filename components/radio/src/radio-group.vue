@@ -3,7 +3,6 @@
     class="vcomp-radio-group"
     :class="[
       {
-        'vcomp-radio-group--button' : button,
         'vcomp-radio-group--vertical' : vertical && !button
       },
       size ? `vcomp-radio-group--${size}` : ''
@@ -23,10 +22,6 @@ export default {
     value: {
       type: [String, Number, Boolean],
       default: ''
-    },
-    button: {
-      type: Boolean,
-      default: false
     },
     vertical: {
       type: Boolean,

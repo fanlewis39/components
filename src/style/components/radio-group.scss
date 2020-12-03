@@ -1,72 +1,65 @@
+.vcomp-radio-group--medium {
+  .vcomp-radio--button .vcomp-radio__label {
+    padding: 10px 20px;
+  }
+
+  .vcomp-radio.is-bordered {
+    padding: 10px 20px;
+  }
+}
+
+.vcomp-radio-group--small {
+  .vcomp-radio--button .vcomp-radio__label {
+    padding: 8px 15px;
+  }
+
+  .vcomp-radio.is-bordered {
+    padding: 8px 15px;
+  }
+
+  .vcomp-radio__inner {
+    width: 12px;
+    height: 12px;
+  }
+}
+
+.vcomp-radio-group--mini {
+  .vcomp-radio--button .vcomp-radio__label {
+    padding: 6px 15px;
+  }
+
+  .vcomp-radio.is-bordered {
+    padding: 6px 15px;
+  }
+
+  .vcomp-radio__inner {
+    width: 12px;
+    height: 12px;
+  }
+}
+
 .vcomp-radio-group {
   display: inline-block;
+  font-size: 0;
   line-height: 1;
   vertical-align: middle;
-  font-size: 0;
 
   &--vertical .vcomp-radio {
     display: block;
     height: 30px;
     line-height: 30px;
   }
-}
 
-.vcomp-radio-group--button {
-  .vcomp-radio {
-    margin: 0;
-
+  .vcomp-radio--button:first-child {
     .vcomp-radio__label {
-      padding: 12px 20px;
-      border: 1px solid #dcdee2;
-      border-left: 0;
+      border-left: 1px solid #dcdee2;
+      border-radius: 4px 0 0 4px;
     }
   }
 
-  .vcomp-radio__input {
-    display: none;
-  }
-
-  &:first-child .vcomp-radio__label {
-    border-left: 1px solid #dcdee2;
-    border-radius: 4px 0 0 4px;
-  }
-
-  &:last-child .vcomp-radio__label {
-    border-radius: 0 4px 4px 0;
-  }
-
-  &.vcomp-radio-group--medium {
+  .vcomp-radio--button:last-child {
     .vcomp-radio__label {
-      padding: 10px 20px;
-    }
-  }
-
-  &.vcomp-radio-group--small {
-    .vcomp-radio__label {
-      padding: 8px 15px;
-    }
-  }
-
-  &.vcomp-radio-group--mini {
-    .vcomp-radio__label {
-      padding: 6px 15px;
-    }
-  }
-
-  .is-checked {
-    .vcomp-radio__label {
-      border-color: #00c0ec;
-      box-shadow: -1px 0 0 0 #00c0ec;
-      color: #00c0ec;
-      transition: all 0.3s;
-    }
-
-    &.is-disabled {
-      .vcomp-radio__label {
-        background-color: #f2f6fc;
-        color: #c0c4cc;
-        border-color: #dcdee2;
-      }
+      border-radius: 0 4px 4px 0;
     }
   }
 }
@@ -90,34 +83,6 @@
       color: #dcdee2;
       border-color: #dcdee2;
     }
-  }
-}
-
-.vcomp-radio-group--medium {
-  .vcomp-radio.is-bordered {
-    padding: 10px 20px;
-  }
-}
-
-.vcomp-radio-group--small {
-  .vcomp-radio.is-bordered {
-    padding: 8px 15px;
-  }
-
-  .vcomp-radio__inner {
-    width: 12px;
-    height: 12px;
-  }
-}
-
-.vcomp-radio-group--mini {
-  .vcomp-radio.is-bordered {
-    padding: 6px 15px;
-  }
-
-  .vcomp-radio__inner {
-    width: 12px;
-    height: 12px;
   }
 }
 
