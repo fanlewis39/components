@@ -1,5 +1,5 @@
 <template>
-  <button
+  <div
     class="vcomp-button"
     :class="[
       `vcomp-button--${type}`,
@@ -17,32 +17,21 @@
     :autofocus="autofocus"
     @click="handleClick"
   >
-    <Icon
-      v-if="loading"
-      name="spinner"
-    ></Icon>
-    <Icon
-      v-if="icon && !loading"
-      :name="icon"
-    ></Icon>
+    <Icon v-if="loading" name="spinner"></Icon>
+    <Icon v-if="icon && !loading" :name="icon"></Icon>
     <span v-if="$slots.default"><slot></slot></span>
-  </button>
+  </div>
 </template>
 
 <script>
-import Icon from '../../icon'
-
 export default {
-  name: 'Button',
-  components: {
-    Icon
-  },
+  name: 'VButton',
   props: {
     type: {
       type: String,
       default: 'default',
       validator(value) {
-        return ['primary', 'success', 'warning', 'danger', 'info', 'text'].includes(value)
+        return ['default', 'primary', 'success', 'warning', 'danger', 'info', 'text'].includes(value)
       }
     },
     icon: {

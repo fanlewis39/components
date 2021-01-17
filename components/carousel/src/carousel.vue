@@ -9,38 +9,29 @@
       @mouseenter.stop="handleMouseEnter"
       @mouseleave.stop="handleMouseLeave"
     >
-      <transition
-        v-if="arrowDisplay"
-        name="vcomp-fade"
-      >
-        <button 
+      <transition v-if="arrowDisplay" name="vcomp-fade">
+        <button
+          v-show="arrow === 'always' || hover"
           type="button"
           class="vcomp-carousel__arrow"
-          v-show="arrow === 'always' || hover"
           :class="`vcomp-carousel__arrow--${arrowList[0]}`"
           @click="handlePrevClick"
         >
           <Icon :name="`angle-${arrowList[0]}`"></Icon>
         </button>
       </transition>
-      <transition
-        v-if="arrowDisplay"
-        name="vcomp-fade"
-      >
-        <button 
+      <transition v-if="arrowDisplay" name="vcomp-fade">
+        <button
+          v-show="arrow === 'always' || hover"
           type="button"
           class="vcomp-carousel__arrow"
-          v-show="arrow === 'always' || hover"
           :class="`vcomp-carousel__arrow--${arrowList[1]}`"
           @click="handleNextClick"
         >
           <Icon :name="`angle-${arrowList[1]}`"></Icon>
         </button>
       </transition>
-      <div
-        class="vcomp-carousel__list"
-        :style="listStyle"
-      >
+      <div class="vcomp-carousel__list" :style="listStyle">
         <div
           class="vcomp-carousel__track"
           :style="trackStyle"
@@ -61,10 +52,7 @@
       class="vcomp-carousel__dots"
       :class="`vcomp-carousel__dots--${direction}`"
     >
-      <li
-        v-for="index in counts"
-        :key="index"
-      >
+      <li v-for="index in counts" :key="index">
         <div
           class="vcomp-carousel__dot"
           :class="[
@@ -84,7 +72,7 @@ import CarouselItem from './carousel-item'
 import Icon from '../../icon'
 
 export default {
-  name: 'Carousel',
+  name: 'VCarousel',
   components: {
     Icon
   },

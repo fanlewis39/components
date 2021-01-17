@@ -10,7 +10,7 @@ module.exports = {
   ],
   rules: {
     'semi': ["error", "never"],
-    'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
+    'no-console': 'off',
     'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
     'space-before-function-paren': [
       'error',
@@ -41,7 +41,7 @@ module.exports = {
     'vue/match-component-file-name': [
       'error',
       {
-        extensions: ['vue'],
+        extensions: [],
         shouldMatchCase: false
       }
     ],
@@ -61,6 +61,36 @@ module.exports = {
         },
         svg: 'always',
         math: 'always'
+      }
+    ],
+    'vue/order-in-components': [
+      'error',
+      {
+        order: [
+          'el',
+          'name',
+          'parent',
+          'functional',
+          ['delimiters', 'comments'],
+          ['components', 'directives', 'filters'],
+          'extends',
+          'mixins',
+          'inheritAttrs',
+          'model',
+          ['inject', 'provide'],
+          ['props', 'propsData'],
+          'setup',
+          'fetch',
+          'asyncData',
+          'data',
+          'computed',
+          'watch',
+          'LIFECYCLE_HOOKS',
+          'methods',
+          'head',
+          ['template', 'render'],
+          'renderError'
+        ]
       }
     ]
   }

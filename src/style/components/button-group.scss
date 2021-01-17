@@ -1,8 +1,8 @@
-.vcomp-button-group {
+.#{$prefix}-button-group {
   display: inline-block;
   vertical-align: middle;
 
-  & > .vcomp-button {
+  & > .#{$prefix}-button {
     float: left;
   }
 
@@ -10,96 +10,96 @@
     z-index: 1;
   }
 
-  & > .vcomp-button:first-child {
+  & > .#{$prefix}-button:first-child {
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
   }
 
-  & > .vcomp-button:last-child {
+  & > .#{$prefix}-button:last-child {
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
   }
 
-  & > .vcomp-button:first-child:last-child {
+  & > .#{$prefix}-button:first-child:last-child {
     border-top-left-radius: 4px;
     border-top-right-radius: 4px;
     border-bottom-right-radius: 4px;
     border-bottom-left-radius: 4px;
   }
 
-  & > .vcomp-button:first-child:last-child.is-round {
+  & > .#{$prefix}-button:first-child:last-child.is-round {
     border-radius: 20px;
   }
 
-  & > .vcomp-button:first-child:last-child.is-circle {
+  & > .#{$prefix}-button:first-child:last-child.is-circle {
     border-radius: 50%;
   }
 
-  & > .vcomp-button:not(:first-child):not(:last-child) {
+  & > .#{$prefix}-button:not(:first-child):not(:last-child) {
     border-radius: 0;
   }
 
-  & .vcomp-button--primary:first-child {
+  & > .#{$prefix}-button--primary:first-child {
     border-right-color: hsla(0, 0%, 100%, 0.5);
   }
 
-  & .vcomp-button--primary:last-child {
+  & > .#{$prefix}-button--primary:last-child {
     border-left-color: hsla(0, 0%, 100%, 0.5);
   }
 
-  & .vcomp-button--primary:not(:first-child):not(:last-child) {
-    border-right-color: hsla(0, 0%, 100%, 0.5);
-    border-left-color: hsla(0, 0%, 100%, 0.5);
-  }
-
-  & .vcomp-button--success:first-child {
-    border-right-color: hsla(0, 0%, 100%, 0.5);
-  }
-
-  & .vcomp-button--success:last-child {
-    border-left-color: hsla(0, 0%, 100%, 0.5);
-  }
-
-  & .vcomp-button--success:not(:first-child):not(:last-child) {
+  & > .#{$prefix}-button--primary:not(:first-child):not(:last-child) {
     border-right-color: hsla(0, 0%, 100%, 0.5);
     border-left-color: hsla(0, 0%, 100%, 0.5);
   }
 
-  & .vcomp-button--warning:first-child {
+  & > .#{$prefix}-button--success:first-child {
     border-right-color: hsla(0, 0%, 100%, 0.5);
   }
 
-  & .vcomp-button--warning:last-child {
+  & > .#{$prefix}-button--success:last-child {
     border-left-color: hsla(0, 0%, 100%, 0.5);
   }
 
-  & .vcomp-button--warning:not(:first-child):not(:last-child) {
-    border-right-color: hsla(0, 0%, 100%, 0.5);
-    border-left-color: hsla(0, 0%, 100%, 0.5);
-  }
-
-  & .vcomp-button--danger:first-child {
-    border-right-color: hsla(0, 0%, 100%, 0.5);
-  }
-
-  & .vcomp-button--danger:last-child {
-    border-left-color: hsla(0, 0%, 100%, 0.5);
-  }
-
-  & .vcomp-button--danger:not(:first-child):not(:last-child) {
+  & > .#{$prefix}-button--success:not(:first-child):not(:last-child) {
     border-right-color: hsla(0, 0%, 100%, 0.5);
     border-left-color: hsla(0, 0%, 100%, 0.5);
   }
 
-  & .vcomp-button--info:first-child {
+  & > .#{$prefix}-button--warning:first-child {
     border-right-color: hsla(0, 0%, 100%, 0.5);
   }
 
-  & .vcomp-button--info:last-child {
+  & > .#{$prefix}-button--warning:last-child {
     border-left-color: hsla(0, 0%, 100%, 0.5);
   }
 
-  & .vcomp-button--info:not(:first-child):not(:last-child) {
+  & > .#{$prefix}-button--warning:not(:first-child):not(:last-child) {
+    border-right-color: hsla(0, 0%, 100%, 0.5);
+    border-left-color: hsla(0, 0%, 100%, 0.5);
+  }
+
+  & > .#{$prefix}-button--danger:first-child {
+    border-right-color: hsla(0, 0%, 100%, 0.5);
+  }
+
+  & > .#{$prefix}-button--danger:last-child {
+    border-left-color: hsla(0, 0%, 100%, 0.5);
+  }
+
+  & > .#{$prefix}-button--danger:not(:first-child):not(:last-child) {
+    border-right-color: hsla(0, 0%, 100%, 0.5);
+    border-left-color: hsla(0, 0%, 100%, 0.5);
+  }
+
+  & > .#{$prefix}-button--info:first-child {
+    border-right-color: hsla(0, 0%, 100%, 0.5);
+  }
+
+  & > .#{$prefix}-button--info:last-child {
+    border-left-color: hsla(0, 0%, 100%, 0.5);
+  }
+
+  & > .#{$prefix}-button--info:not(:first-child):not(:last-child) {
     border-right-color: hsla(0, 0%, 100%, 0.5);
     border-left-color: hsla(0, 0%, 100%, 0.5);
   }

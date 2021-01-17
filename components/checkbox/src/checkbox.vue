@@ -5,8 +5,10 @@
       {
         'is-disabled': isDisabled,
         'is-checked': isChecked,
-        'is-bordered': border
-      }
+        'is-bordered': border,
+        'vcomp-checkbox--button' : button
+      },
+      checkboxSize && (border || button) ? `vcomp-checkbox--${checkboxSize}` : ''
     ]"
   >
     <span
@@ -19,25 +21,22 @@
       <span class="vcomp-checkbox__inner"></span>
       <input
         v-if="trueValue || falseValue"
-        class="vcomp-checkbox__original"
         type="checkbox"
+        class="vcomp-checkbox__original"
         :checked="isChecked"
         :disabled="isDisabled"
         @change="handleChange"
       />
       <input
         v-else
-        class="vcomp-checkbox__original"
         type="checkbox"
+        class="vcomp-checkbox__original"
         :checked="isChecked"
         :disabled="isDisabled"
         @change="handleChange"
       />
     </span>
-    <span
-      v-if="$slots.default || label"
-      class="vcomp-checkbox__label"
-    >
+    <span v-if="$slots.default || label" class="vcomp-checkbox__label">
       <slot></slot>
       <template v-if="!$slots.default">{{ label }}</template>
     </span>
@@ -49,8 +48,10 @@ import Emitter from '../../../src/mixins/emitter'
 import CheckboxGroup from '../../checkbox-group'
 
 export default {
-  name: 'Checkbox',
+  name: 'VCheckbox',
+  mixins: [Emitter],
   model: {
+    props: 'value',
     event: 'change'
   },
   props: {
@@ -70,6 +71,17 @@ export default {
       type:Boolean,
       default: false
     },
+    button: {
+      type: Boolean,
+      default: false
+    },
+    size: {
+      type: String,
+      default: null,
+      validator(value) {
+        return ['medium', 'small', 'mini'].includes(value)
+      }
+    },
     trueValue: {
       type: [String, Number],
       default: ''
@@ -79,36 +91,34 @@ export default {
       default: ''
     }
   },
-  mixins: [Emitter],
   data() {
     return {
       currentValue: '',
       isGroup: false
     }
   },
-  watch: {
-    value(value) {
-      this.currentValue = value
-    }
-  },
   computed: {
     isChecked() {
-      let isChecked
-
       if ({}.toString.call(this.currentValue) === '[object Boolean]') {
-        isChecked = this.currentValue
+        return this.currentValue
       } else if (Array.isArray(this.currentValue)) {
-        isChecked = this.currentValue.includes(this.label)
+        return this.currentValue.includes(this.label)
       } else {
-        isChecked = this.currentValue === this.trueValue
+        return this.currentValue === this.trueValue
       }
-
-      return isChecked
     },
     isDisabled() {
       return this.isGroup
         ? this._checkboxGroup.disabled || this.disabled
         : this.disabled
+    },
+    checkboxSize() {
+      return this.isGroup ? this._checkboxGroup.size || this.size : this.size
+    }
+  },
+  watch: {
+    value(value) {
+      this.currentValue = value
     }
   },
   mounted() {

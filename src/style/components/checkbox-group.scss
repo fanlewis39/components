@@ -1,0 +1,16 @@
+.#{$prefix}-checkbox-group {
+  .#{$prefix}--button {
+    &:first-child {
+      .#{$prefix}-checkbox__label {
+        border-left: 1px solid #dcdee2;
+        border-radius: 4px 0 0 4px;
+      }
+    }
+
+    &:last-child {
+      .#{$prefix}-checkbox__label {
+        border-radius: 0 4px 4px 0;
+      }
+    }
+  }
+}

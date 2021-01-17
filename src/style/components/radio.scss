@@ -1,4 +1,4 @@
-.vcomp-radio {
+.#{$prefix}-radio {
   position: relative;
   display: inline-block;
   margin-right: 30px;
@@ -7,6 +7,10 @@
   cursor: pointer;
   user-select: none;
 
+  &:last-of-type {
+    margin-right: 0;
+  }
+
   &.is-bordered {
     padding: 12px 20px;
     border: 1px solid #dcdee2;
@@ -14,117 +18,148 @@
 
     &.is-checked {
       border: 1px solid #00c0ec;
+
+      &.is-disabled {
+        border: 1px solid #dcdee2;
+      }
     }
 
-    &.vcomp-radio--medium {
+    &.#{$prefix}-radio--medium {
       padding: 10px 20px;
     }
 
-    &.vcomp-radio--small {
+    &.#{$prefix}-radio--small {
       padding: 8px 15px;
       font-size: 12px;
     }
 
-    &.vcomp-radio--mini {
+    &.#{$prefix}-radio--mini {
       padding: 6px 15px;
       font-size: 12px;
     }
   }
-}
 
-.vcomp-radio__inner {
-  position: relative;
-  box-sizing: border-box;
-  display: inline-block;
-  width: 14px;
-  height: 14px;
-  cursor: pointer;
-  background-color: #fff;
-  border: 1px solid #dcdfe6;
-  border-radius: 100%;
-
-  &::after {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 4px;
-    height: 4px;
-    content: "";
-    background-color: #fff;
-    border-radius: 100%;
-    transition: transform 0.2s ease-in;
-    transform: translate(-50%, -50%) scale(0);
-  }
-
-  &:hover {
-    border: 1px solid #00c0ec;
-  }
-}
-
-.vcomp-radio__input {
-  position: relative;
-  line-height: 0;
-  vertical-align: middle;
-  cursor: pointer;
-
-  &.is-checked .vcomp-radio__inner {
+  &__inner {
+    position: relative;
     box-sizing: border-box;
-    background-color: #00c0ec;
-    border-color: #00c0ec;
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    border: 1px solid #dcdfe6;
+    border-radius: 100%;
 
     &::after {
-      transform: translate(-50%, -50%) scale(1);
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 4px;
+      height: 4px;
+      content: "";
+      background-color: #fff;
+      border-radius: 100%;
+      transition: transform 0.2s ease-in;
+      transform: translate(-50%, -50%) scale(0);
+    }
+
+    &:hover {
+      border: 1px solid #00c0ec;
     }
   }
 
-  &.is-disabled {
-    & + span {
-      color: #c0c4cc;
-      cursor: not-allowed;
-    }
-
-    &.is-checked .vcomp-radio__inner {
-      background-color: #f5f7fa;
-      border-color: #e4e7ed;
-
-      &::after {
-        background-color: #c0c4cc;
-      }
-    }
+  &__label {
+    display: inline-block;
+    padding-left: 10px;
+    vertical-align: middle;
+    transition: all 0.3s;
   }
-}
 
-.vcomp-radio__original {
-  position: absolute;
-  z-index: -1;
-  margin: 0;
-  opacity: 0;
-}
-
-.vcomp-radio__label {
-  display: inline-block;
-  padding-left: 10px;
-  vertical-align: middle;
-  transition: all 0.3s;
-}
-
-.vcomp-radio--button {
-  margin: 0;
-
-  .vcomp-radio__label {
+  &--button .#{$prefix}-radio__label {
     padding: 12px 20px;
     border: 1px solid #dcdee2;
     border-left: 0;
   }
 
-  .vcomp-radio__input {
-    display: none;
+  &.#{$prefix}-radio--small,
+  &.#{$prefix}-radio--mini {
+    .#{$prefix}-radio__inner {
+      width: 12px;
+      height: 12px;
+    }
+
+    .#{$prefix}-radio__label {
+      font-size: 12px;
+    }
   }
 
-  &.is-checked {
-    .vcomp-radio__label {
+  &__input {
+    position: relative;
+    line-height: 0;
+    vertical-align: middle;
+    cursor: pointer;
+
+    &.is-checked .#{$prefix}-radio__inner {
+      box-sizing: border-box;
+      background-color: #00c0ec;
+      border-color: #00c0ec;
+
+      &::after {
+        transform: translate(-50%, -50%) scale(1);
+      }
+    }
+
+    &.is-disabled {
+      & + span {
+        color: #c0c4cc;
+        cursor: not-allowed;
+      }
+
+      &.is-checked .#{$prefix}-radio__inner {
+        background-color: #f5f7fa;
+        border-color: #e4e7ed;
+
+        &::after {
+          background-color: #c0c4cc;
+        }
+      }
+    }
+  }
+
+  &--button {
+    margin: 0;
+
+    .#{$prefix}-radio__input {
+      display: none;
+    }
+
+    &.is-checked .#{$prefix}-radio__label {
       color: white;
       background-color: #00c0ec;
     }
+
+    &.#{$prefix}-radio--medium .#{$prefix}-radio__label {
+      padding: 10px 20px;
+    }
+
+    &.#{$prefix}-radio--small .#{$prefix}-radio__label {
+      padding: 8px 15px;
+    }
+
+    &.#{$prefix}-radio--mini .#{$prefix}-radio__label {
+      padding: 6px 15px;
+    }
+
+    &.is-checked.is-disabled {
+      .#{$prefix}-radio__label {
+        color: #c0c4cc;
+        background-color: #f2f6fc;
+      }
+    }
+  }
+
+  &__original {
+    position: absolute;
+    z-index: -1;
+    margin: 0;
+    opacity: 0;
   }
 }

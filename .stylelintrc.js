@@ -8,5 +8,7 @@ module.exports = {
     'stylelint-order',
     'stylelint-scss'
   ],
-  rules: {}
+  rules: {
+    'at-rule-no-unknown': null
+  }
 }

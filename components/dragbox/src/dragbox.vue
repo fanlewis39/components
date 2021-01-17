@@ -1,12 +1,9 @@
 <template>
-  <div
-    class="vcomp-drag-box"
-    :class="boxClass"
-  >
+  <div class="vcomp-drag-box" :class="boxClass">
     <transition name="vcomp-fade">
       <div
-        class="vcomp-drag-box__wrapper"
         v-show="currentActive"
+        class="vcomp-drag-box__wrapper"
         :style="{ 
           width: `${width}px`,
           height: `${height}px`,
@@ -19,10 +16,7 @@
           @mousedown="handleMouseDown"
         >
           <span>{{ title }}</span>
-          <div
-            class="vcomp-drag-box--close"
-            @click="close"
-          >
+          <div class="vcomp-drag-box--close" @click="close">
             <Icon name="times"></Icon>
           </div>
         </div>
@@ -36,7 +30,7 @@
 import Icon from '../../icon'
 
 export default {
-  name: 'DragBox',
+  name: 'VDragbox',
   components: {
     Icon
   },

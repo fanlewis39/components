@@ -8,7 +8,7 @@
         'is-bordered': border,
         'vcomp-radio--button' : button
       },
-      size && border ? `vcomp-radio--${size}` : ''
+      radioSize && (border || button) ? `vcomp-radio--${radioSize}` : ''
     ]"
   >
     <span
@@ -39,8 +39,10 @@ import Emitter from '../../../src/mixins/emitter'
 import RadioGroup from '../../radio-group'
 
 export default {
-  name: 'Radio',
+  name: 'VRadio',
+  mixins: [Emitter],
   model: {
+    prop: 'value',
     event: 'change'
   },
   props: {
@@ -67,13 +69,12 @@ export default {
     },
     size: {
       type: String,
-      default: '',
+      default: null,
       validator(value) {
-        return ['medium', 'small', 'mini', ''].includes(value)
+        return ['medium', 'small', 'mini'].includes(value)
       }
     }
   },
-  mixins: [Emitter],
   data() {
     return {
       currentValue: '',
@@ -85,6 +86,9 @@ export default {
       return this.isGroup
         ? this._radioGroup.disabled || this.disabled
         : this.disabled
+    },
+    radioSize() {
+      return this.isGroup ? this._radioGroup.size || this.size : this.size
     }
   },
   watch: {

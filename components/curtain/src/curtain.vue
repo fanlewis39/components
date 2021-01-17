@@ -5,8 +5,8 @@
   >
     <transition :name="transitionName">
       <div
-        class="vcomp-curtain__wrapper"
         v-show="currentActive"
+        class="vcomp-curtain__wrapper"
         :style="wrapperStyle"
       >
         <div
@@ -27,7 +27,7 @@
 
 <script>
 export default {
-  name: 'Curtain',
+  name: 'VCurtain',
   model: {
     prop: 'active',
     event: 'toggle'
@@ -81,10 +81,8 @@ export default {
   },
   computed: {
     wrapperStyle() {
-      let wrapperStyle = {}
-
-      wrapperStyle =
-        (['left', 'right'].indexOf(this.direction) !== -1)
+      let wrapperStyle =
+        (['left', 'right'].includes(this.direction))
           ? {
             width: `${this.wrapperWidth}px`,
             height: `${this.clientHeight}px`

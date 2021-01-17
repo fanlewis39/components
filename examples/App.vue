@@ -1,53 +1,86 @@
+<!--eslint-disable -->
 <template>
   <div id="app">
-    <!-- <Checkbox
-      v-model="checkbox"
+    <!-- <Select v-model="value"></Select> -->
+    <v-input
+      placeholder="请输入内容"
+      v-model="value"
+      clearable
+      prefix-icon="search"
+      size="small"
+      style="margin-left: 5px"
+    >
+    </v-input>
+    <!-- <v-input
+      placeholder="请输入内容"
+      v-model="value"
+      style="margin-left: 5px"
+    >
+      <Icon slot="prefix" name="search" color="red"></Icon>
+    </v-input> -->
+    <!-- <v-checkbox
+      v-model="checkbox1"
       border
+      :true-value="111"
+      :false-value="222"
     >
       多选框1
-    </Checkbox>
-    <Checkbox
-      v-model="checkbox"
+    </v-checkbox>
+    <v-checkbox
+      v-model="checkbox2"
       border
     >
       多选框2
-    </Checkbox> -->
-    <!-- <CheckboxGroup v-model="checkList">
-      <Checkbox label="多选框1"></Checkbox>
-      <Checkbox label="多选框2"></Checkbox>
-      <Checkbox label="多选框3"></Checkbox>
-    </CheckboxGroup> -->
-    <!-- <RadioGroup
+    </v-checkbox> -->
+    <!-- <v-checkbox-group v-model="checkList" disabled>
+      <v-checkbox
+        label="多选框1"
+        v-button
+        size="small"
+      ></v-checkbox>
+      <v-checkbox
+        label="多选框2"
+        v-button
+        size="small"
+      ></v-checkbox>
+      <v-checkbox
+        label="多选框3"
+        v-button
+        size="small"
+      ></v-checkbox>
+    </v-checkbox-group> -->
+    <!-- <v-radio-group
+      disabled
       v-model="radio"
       size="small"
     >
-      <Radio
+      <v-radio
         v-for="item in radioItems"
         :key="item"
         :label="item"
-        button
+        v-button
       >
         {{ item }}
-      </Radio>
-    </RadioGroup> -->
-    <Radio
+      </v-radio>
+    </v-radio-group> -->
+    <!-- <v-radio
       label="选项1"
       v-model="radio"
       size="mini"
       border
     >
       选项1
-    </Radio>
-    <Radio label="选项2" v-model="radio">
+    </v-radio>
+    <v-radio label="选项2" v-model="radio">
       选项2
-    </Radio>
-    <!-- <Radio label='1' v-model="radio">
+    </v-radio> -->
+    <!-- <v-radio label='1' v-model="radio">
       选项1
-    </Radio> -->
-    <!-- <Checkbox v-model="checked">
+    </v-radio> -->
+    <!-- <v-checkbox v-model="checked">
       aa
-    </Checkbox>
-    <Checkbox :label="11"></Checkbox> -->
+    </v-checkbox>
+    <v-checkbox :label="11"></v-checkbox> -->
     <!-- <Curtain
       direction="right"
       curtain-class="curtain-test"
@@ -60,80 +93,80 @@
       </div>
     </Curtain> -->
     <!-- <Curtain v-model="active"></Curtain> -->
-    <!-- <button @click="handleClick">
+    <!-- <v-button @click="handleClick">
       test
-    </button> -->
-    <!-- <DragBox
+    </v-button> -->
+    <!-- <v-dragbox
       v-model="active"
       :box-class="['drag-text', 'a']"
       title="title"
     >
       aaa
-    </DragBox> -->
-    <!-- <Carousel
+    </v-dragbox> -->
+    <!-- <v-carousel
       :auto-play="false"
       :loop="true"
       height="200"
       @change="handleChange"
       @select="handleSelect"
     >
-      <CarouselItem item-class="aa">
+      <v-carousel-item item-class="aa">
         <div class="carousel-demo">
           1
         </div>
-      </CarouselItem>
-      <CarouselItem item-class="aa">
+      </v-carousel-item>
+      <v-carousel-item item-class="aa">
         <div class="carousel-demo">
           2
         </div>
-      </CarouselItem>
-      <CarouselItem item-class="aa">
+      </v-carousel-item>
+      <v-carousel-item item-class="aa">
         <div class="carousel-demo">
           3
         </div>
-      </CarouselItem>
-    </Carousel> -->
-    <!-- <ButtonGroup>
-      <Button
+      </v-carousel-item>
+    </v-carousel> -->
+    <!-- <v-button-group>
+      <v-button
         plain
         size="mini"
         icon="arrow-left"
       >
-      </Button>
-      <Button
+      </v-button>
+      <v-button
         size="mini"
         icon="arrow-left"
       >
-      </Button>
-      <Button
+      </v-button>
+      <v-button
         type="primary"
         size="mini"
         icon="arrow-right"
       >
-      </Button>
-      <Button
+      </v-button>
+      <v-button
         type="info"
         size="mini"
         icon="arrow-right"
       >
-      </Button>
-    </ButtonGroup>
-    <ButtonGroup style="margin-left: 10px">
-      <Button
+      </v-button>
+    </v-button-group>
+    <v-button-group style="margin-left: 10px">
+      <v-button
         plain
         size="mini"
         icon="arrow-left"
         disabled
       >
-      </Button>
-    </ButtonGroup> -->
-    <!-- <Button
+      </v-button>
+    </v-button-group> -->
+    <!-- <v-button
       disabled
       type="text"
       size="mini"
       icon="arrow-left"
     >
-    </Button> -->
+    </v-button> -->
   </div>
 </template>
 
@@ -154,8 +187,10 @@ export default {
       checked: true,
       radio: '选项1',
       radioItems: ['选项1', '选项2', '选项3'],
-      checkbox: false,
-      checkList: ['多选框2', '多选框1']
+      checkbox1: 111,
+      checkbox2: true,
+      checkList: ['多选框1', '多选框2'],
+      value: ''
     }
   },
   methods: {

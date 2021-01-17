@@ -1,57 +1,57 @@
-.vcomp-curtain {
+.#{$prefix}-curtain {
   position: fixed;
 
   &--inner {
     position: absolute;
   }
-}
 
-.vcomp-curtain__wrapper {
-  box-shadow: 0 1px 4px rgb(185 185 185);
-}
-
-.vcomp-curtain__handle {
-  position: absolute;
-  cursor: pointer;
-  background-color: rgb(179 174 174);
-
-  &:hover {
-    background-color: rgb(132 130 130);
+  &__wrapper {
+    box-shadow: 0 1px 4px rgb(185 185 185);
   }
 
-  &--top {
-    top: -5px;
-    left: 50%;
-    width: 80px;
-    height: 5px;
-    border-radius: 6px 6px 0 0;
-    transform: translateX(-50%);
-  }
+  &__handle {
+    position: absolute;
+    cursor: pointer;
+    background-color: rgb(179 174 174);
 
-  &--right {
-    top: 50%;
-    right: -5px;
-    width: 5px;
-    height: 80px;
-    border-radius: 0 6px 6px 0;
-    transform: translateY(-50%);
-  }
+    &:hover {
+      background-color: rgb(132 130 130);
+    }
 
-  &--bottom {
-    bottom: -5px;
-    left: 50%;
-    width: 80px;
-    height: 5px;
-    border-radius: 0 0 6px 6px;
-    transform: translateX(-50%);
-  }
+    &--top {
+      top: -5px;
+      left: 50%;
+      width: 80px;
+      height: 5px;
+      border-radius: 6px 6px 0 0;
+      transform: translateX(-50%);
+    }
 
-  &--left {
-    top: 50%;
-    left: -5px;
-    width: 5px;
-    height: 80px;
-    border-radius: 6px 0 0 6px;
-    transform: translateY(-50%);
+    &--right {
+      top: 50%;
+      right: -5px;
+      width: 5px;
+      height: 80px;
+      border-radius: 0 6px 6px 0;
+      transform: translateY(-50%);
+    }
+
+    &--bottom {
+      bottom: -5px;
+      left: 50%;
+      width: 80px;
+      height: 5px;
+      border-radius: 0 0 6px 6px;
+      transform: translateX(-50%);
+    }
+
+    &--left {
+      top: 50%;
+      left: -5px;
+      width: 5px;
+      height: 80px;
+      border-radius: 6px 0 0 6px;
+      transform: translateY(-50%);
+    }
   }
 }

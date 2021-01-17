@@ -1,8 +1,8 @@
 <template>
   <div
     class="vcomp-carousel-item"
-    :class="itemClass"
     style="width: auto; width: auto;"
+    :class="itemClass"
     @click="handleClick"
   >
     <slot></slot>
@@ -14,14 +14,14 @@ import Emitter from '../../../src/mixins/emitter'
 import Carousel from './carousel'
 
 export default {
-  name: 'CarouselItem',
+  name: 'VCarouselItem',
+  mixins: [Emitter],
   props: {
     itemClass: {
       type: [String, Array],
       default: null
     }
   },
-  mixins: [Emitter],
   mounted() {
     this._carousel = this.$parent
   },

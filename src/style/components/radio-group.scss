@@ -1,94 +1,27 @@
-.vcomp-radio-group--medium {
-  .vcomp-radio--button .vcomp-radio__label {
-    padding: 10px 20px;
-  }
-
-  .vcomp-radio.is-bordered {
-    padding: 10px 20px;
-  }
-}
-
-.vcomp-radio-group--small {
-  .vcomp-radio--button .vcomp-radio__label {
-    padding: 8px 15px;
-  }
-
-  .vcomp-radio.is-bordered {
-    padding: 8px 15px;
-  }
-
-  .vcomp-radio__inner {
-    width: 12px;
-    height: 12px;
-  }
-}
-
-.vcomp-radio-group--mini {
-  .vcomp-radio--button .vcomp-radio__label {
-    padding: 6px 15px;
-  }
-
-  .vcomp-radio.is-bordered {
-    padding: 6px 15px;
-  }
-
-  .vcomp-radio__inner {
-    width: 12px;
-    height: 12px;
-  }
-}
-
-.vcomp-radio-group {
+.#{$prefix}-radio-group {
   display: inline-block;
   font-size: 0;
   line-height: 1;
   vertical-align: middle;
 
-  &--vertical .vcomp-radio {
+  &--vertical .#{$prefix}-radio {
     display: block;
     height: 30px;
     line-height: 30px;
   }
 
-  .vcomp-radio--button:first-child {
-    .vcomp-radio__label {
-      border-left: 1px solid #dcdee2;
-      border-radius: 4px 0 0 4px;
-    }
-  }
-
-  .vcomp-radio--button:last-child {
-    .vcomp-radio__label {
-      border-radius: 0 4px 4px 0;
-    }
-  }
-}
-
-.vcomp-radio-group--border {
-  .vcomp-radio {
-    padding: 12px 20px;
-    border: 1px solid #dcdee2;
-    border-radius: 4px;
-
-    &.is-disabled {
-      cursor: not-allowed;
+  .#{$prefix}-radio--button {
+    &:first-child {
+      .#{$prefix}-radio__label {
+        border-left: 1px solid #dcdee2;
+        border-radius: 4px 0 0 4px;
+      }
     }
 
-    &.is-checked {
-      color: #00c0ec;
-      border-color: #00c0ec;
+    &:last-child {
+      .#{$prefix}-radio__label {
+        border-radius: 0 4px 4px 0;
+      }
     }
-
-    &.is-disabled.is-checked {
-      color: #dcdee2;
-      border-color: #dcdee2;
-    }
-  }
-}
-
-.vcomp-radio-group--small,
-.vcomp-radio-group--mini {
-  .vcomp-radio {
-    font-size: 12px;
   }
 }

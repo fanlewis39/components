@@ -3,8 +3,9 @@
     <slot></slot>
   </div>
 </template>
+
 <script>
   export default {
-    name: 'ButtonGroup'
+    name: 'VButtonGroup'
   }
 </script>
